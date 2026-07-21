@@ -21,8 +21,8 @@
       --bg:#080816;--bg-card:rgba(255,255,255,0.035);
       --surface:rgba(255,255,255,0.05);--text:#e8e8f0;--text-muted:#8888a0;--text-dim:#555570;
       --border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.14);
-      --radius:20px;--radius-sm:12px;--radius-xs:8px;
-      --shadow:0 8px 32px rgba(0,0,0,0.4);--shadow-lg:0 20px 60px rgba(0,0,0,0.5);
+      --radius:20px;--radius-sm:12px;
+      --shadow:0 8px 32px rgba(0,0,0,0.4);
       --glow:0 0 60px rgba(0,212,170,0.12);
       --transition:0.45s cubic-bezier(0.22,1,0.36,1);
     }
@@ -79,77 +79,82 @@
       90%{opacity:1}
       100%{transform:translateY(-120vh) scale(0.3);opacity:0}
     }
-    .hero-content{position:relative;z-index:2;text-align:center;max-width:920px;width:100%}
-    .hero-badge{
-      display:inline-flex;align-items:center;gap:0.5rem;padding:0.35rem 1.1rem;border-radius:50px;
-      background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);
-      color:var(--primary-light);font-size:0.75rem;font-weight:600;margin-bottom:1.8rem;font-family:'JetBrains Mono',monospace
-    }
-    .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 14px var(--primary);animation:pulse 2s ease-in-out infinite}
-    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(0.8)}}
 
-    .avatar-wrap{position:relative;display:inline-block;margin-bottom:1.8rem}
-    .avatar{
-      width:120px;height:120px;border-radius:30px;
+    .hero-inner{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:0 1.5rem}
+    .hero-watermark{font-size:0.6rem;font-family:'JetBrains Mono',monospace;color:var(--text-dim);letter-spacing:0.2em;margin-bottom:2rem}
+    .hero-grid-layout{display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:center}
+    .hero-left{text-align:center}
+
+    .avatar-badge-wrap{position:relative;display:inline-block}
+    .avatar-frame{
+      width:140px;height:140px;border-radius:32px;
       background:linear-gradient(135deg,var(--primary),#6c5ce7,var(--secondary));
       display:flex;align-items:center;justify-content:center;
-      font-size:3rem;font-weight:900;color:#fff;
+      font-size:3.5rem;font-weight:900;color:#fff;
       box-shadow:0 0 0 3px rgba(0,212,170,0.15),var(--glow);
       position:relative;overflow:hidden
     }
-    .avatar::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,0.2),transparent 50%);mix-blend-mode:overlay}
-    .avatar span{position:relative;z-index:1}
+    .avatar-frame::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,0.25),transparent 50%);mix-blend-mode:overlay}
+    .avatar-frame span{position:relative;z-index:1}
     .avatar-ring{
-      position:absolute;inset:-6px;border-radius:36px;
-      border:1.5px solid rgba(0,212,170,0.1);
+      position:absolute;inset:-6px;border-radius:38px;
+      border:1.5px solid rgba(0,212,170,0.12);
       animation:ringSpin 8s linear infinite
     }
     @keyframes ringSpin{to{transform:rotate(360deg)}}
+    .avatar-glow-dot{position:absolute;top:-3px;left:-3px;width:10px;height:10px;border-radius:50%;background:var(--primary);filter:blur(8px);opacity:0.7}
 
-    .hero h1{
-      font-size:2.8rem;font-weight:900;line-height:1.1;
-      background:linear-gradient(135deg,#fff 25%,var(--primary-light),var(--secondary));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      margin-bottom:0.4rem
+    .floating-badge{
+      position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      background:rgba(0,212,170,0.12);border:1px solid rgba(0,212,170,0.2);
+      color:var(--primary-light);font-size:0.65rem;font-weight:700;
+      padding:0.2rem 0.9rem;border-radius:50px;white-space:nowrap;
+      display:flex;align-items:center;gap:0.35rem
     }
-    .hero .subtitle{font-size:1.15rem;color:rgba(255,255,255,0.65);font-weight:500;margin-bottom:0.2rem}
-    .hero .subtitle-en{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--text-dim);letter-spacing:0.15em;margin-bottom:1.5rem}
+    .floating-badge .star{font-size:0.55rem}
 
-    .hero-contacts{display:flex;justify-content:center;gap:0.6rem;flex-wrap:wrap;margin-bottom:1rem}
-    .hero-contacts a,.hero-contacts span{
-      display:inline-flex;align-items:center;gap:0.35rem;
-      padding:0.35rem 0.9rem;border-radius:50px;
-      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);
+    .hero-right{text-align:right}
+    .available-badge{
+      display:inline-flex;align-items:center;gap:0.4rem;
+      font-size:0.7rem;font-family:'JetBrains Mono',monospace;
+      color:var(--primary);margin-bottom:1rem
+    }
+    .available-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 12px var(--primary);animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
+
+    .hero-right h1{
+      font-size:3.2rem;font-weight:900;line-height:1.1;
+      background:linear-gradient(135deg,#fff 30%,var(--primary-light),var(--secondary));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      margin-bottom:0.3rem
+    }
+    .hero-right .role{font-size:1.2rem;color:rgba(255,255,255,0.7);font-weight:600;margin-bottom:0.1rem}
+    .hero-right .role-en{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--text-dim);letter-spacing:0.15em;margin-bottom:1.5rem}
+
+    .contact-pills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem}
+    .contact-pills a,.contact-pills span{
+      display:inline-flex;align-items:center;gap:0.3rem;
+      padding:0.3rem 0.8rem;border-radius:50px;
+      background:rgba(255,255,255,0.03);border:1px solid var(--border);
+      color:var(--text-muted);font-size:0.78rem;transition:var(--transition)
+    }
+    .contact-pills a:hover{background:rgba(0,212,170,0.07);border-color:rgba(0,212,170,0.18);color:var(--primary-light);transform:translateY(-2px)}
+    .contact-pills i{width:12px;font-size:0.7rem}
+
+    .social-links{display:flex;gap:0.6rem;margin-bottom:1.5rem}
+    .social-links a{
+      width:34px;height:34px;border-radius:50%;
+      background:rgba(255,255,255,0.03);border:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
       color:var(--text-muted);font-size:0.8rem;transition:var(--transition)
     }
-    .hero-contacts a:hover{background:rgba(0,212,170,0.07);border-color:rgba(0,212,170,0.18);color:var(--primary-light);transform:translateY(-2px)}
-    .hero-contacts i{width:13px;font-size:0.75rem}
+    .social-links a:hover{background:rgba(0,212,170,0.08);border-color:rgba(0,212,170,0.2);color:var(--primary);transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,212,170,0.1)}
 
-    .hero-social{display:flex;justify-content:center;gap:0.7rem;margin-bottom:1.8rem}
-    .hero-social a{
-      width:36px;height:36px;border-radius:50%;
-      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);
-      display:flex;align-items:center;justify-content:center;
-      color:var(--text-muted);font-size:0.85rem;transition:var(--transition)
-    }
-    .hero-social a:hover{background:rgba(0,212,170,0.08);border-color:rgba(0,212,170,0.2);color:var(--primary);transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,212,170,0.1)}
-
-    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;max-width:380px;margin:0 auto 2rem}
+    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:320px}
     .stat-item{text-align:center}
-    .stat-value{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
-    .stat-label{font-size:0.7rem;color:var(--text-dim);margin-top:0.15rem}
+    .stat-value{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
+    .stat-label{font-size:0.68rem;color:var(--text-dim);margin-top:0.1rem}
 
-    .hero-actions{display:flex;justify-content:center;gap:0.7rem;flex-wrap:wrap}
-    .btn{
-      display:inline-flex;align-items:center;gap:0.5rem;
-      padding:0.75rem 1.8rem;border-radius:50px;
-      font-family:inherit;font-size:0.9rem;font-weight:600;
-      border:none;cursor:pointer;transition:var(--transition)
-    }
-    .btn-primary{background:linear-gradient(135deg,var(--primary),#00a381);color:#0a0a1a;box-shadow:var(--glow)}
-    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(0,212,170,0.25)}
-    .btn-outline{background:transparent;color:var(--text);border:1.5px solid rgba(255,255,255,0.12)}
-    .btn-outline:hover{border-color:var(--primary);color:var(--primary);background:rgba(0,212,170,0.05);transform:translateY(-3px)}
     .scroll-down{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);color:var(--text-dim);font-size:1.1rem;animation:scrollBounce 2.4s ease-in-out infinite}
     @keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0);opacity:0.5}50%{transform:translateX(-50%) translateY(8px);opacity:1}}
 
@@ -306,10 +311,18 @@
     #pdf-version{display:none}
 
     /* ===== RESPONSIVE ===== */
+    @media(max-width:900px){
+      .hero-grid-layout{grid-template-columns:1fr;gap:1.5rem;text-align:center}
+      .hero-right{text-align:center}
+      .hero-right h1{font-size:2.2rem}
+      .contact-pills,.social-links,.stats-row{justify-content:center;margin-left:auto;margin-right:auto}
+      .available-badge{justify-content:center}
+    }
     @media(max-width:768px){
-      .hero h1{font-size:1.8rem}
-      .hero .subtitle{font-size:0.95rem}
+      .hero-right h1{font-size:1.8rem}
+      .hero-right .role{font-size:0.95rem}
       .stat-value{font-size:1.5rem}
+      .avatar-frame{width:110px;height:110px;font-size:2.8rem}
       section{padding:2.5rem 0}
       .section-title-group h2{font-size:1.3rem}
       .skills-grid{grid-template-columns:1fr}
@@ -318,8 +331,7 @@
       .project-grid{grid-template-columns:1fr}
     }
     @media(max-width:480px){
-      .avatar{width:100px;height:100px;font-size:2.5rem}
-      .hero-contacts a,.hero-contacts span{font-size:0.72rem;padding:0.25rem 0.6rem}
+      .contact-pills a,.contact-pills span{font-size:0.72rem;padding:0.25rem 0.6rem}
       .exp-header h3{font-size:0.95rem}
       .section-icon{width:36px;height:36px;font-size:0.85rem}
     }
@@ -331,17 +343,16 @@
       .no-print,.orb,.hero-grid,.particle,.scroll-down,.download-bar,.scroll-top{display:none!important}
       .hero{min-height:auto!important;padding:0!important}
       .card,.skill-card,.timeline-card,.project-card,.edu-card,.lang-card,.trait-card{background:#fff!important;border:1px solid #ddd!important;box-shadow:none!important;transform:none!important;backdrop-filter:none!important}
-      .hero h1,.stat-value{background:none!important;-webkit-text-fill-color:#0e7490!important;color:#0e7490!important}
+      .hero-right h1,.stat-value{background:none!important;-webkit-text-fill-color:#0e7490!important;color:#0e7490!important}
       .skill-fill{background:#0e7490!important}
-      .btn-primary{background:#0e7490!important;color:#fff!important;box-shadow:none!important}
       .about-text,.exp-list li,.project-grid li,.achievements ul li{color:#444!important}
       .tech-stack span,.course-badge{border-color:#ddd!important;color:#555!important;background:#f5f5f5!important}
       section{padding:1rem 0!important;page-break-inside:avoid}
       .timeline-dot{box-shadow:0 0 0 4px #fff!important}
       h1,h2,h3{color:#0e7490!important}
-      .hero-content{padding:1.5rem 0!important}
+      .hero-inner{padding:1.5rem 0!important}
       .section-header{margin-bottom:1.2rem!important}
-      .avatar{width:90px;height:90px;font-size:2rem}
+      .avatar-frame{width:90px;height:90px;font-size:2rem}
       .section-title-group h2{font-size:1.3rem}
       .exp-header h3{font-size:0.95rem}
       .exp-list li{font-size:0.75rem;line-height:1.6}
@@ -367,31 +378,43 @@
     <div class="hero-grid no-print"></div>
     <div class="orb no-print"></div><div class="orb no-print"></div><div class="orb no-print"></div>
     <div class="no-print" id="particles"></div>
-    <div class="hero-content">
-      <div class="hero-badge"><span class="dot"></span> Available for opportunities</div>
-      <div class="avatar-wrap">
-        <div class="avatar-ring"></div>
-        <div class="avatar"><span>م.م</span></div>
-      </div>
-      <h1>محمد محمودی</h1>
-      <p class="subtitle">مهندس ارشد داده و هوش تجاری</p>
-      <p class="subtitle-en">SENIOR DATA ANALYST &middot; BI ENGINEER</p>
-      <div class="hero-contacts">
-        <a href="tel:09919364887"><i class="fas fa-phone"></i> ۰۹۹۱۹۳۶۴۸۸۷</a>
-        <a href="mailto:mohammed1994159@gmail.com"><i class="fas fa-envelope"></i> mohammed1994159@gmail.com</a>
-        <span><i class="fas fa-map-marker-alt"></i> قم، ایران</span>
-      </div>
-      <div class="hero-social">
-        <a href="https://github.com/mohammadmahmoudi133345-dot" aria-label="GitHub"><i class="fab fa-github"></i></a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat-item"><div class="stat-value" id="stat1">0+</div><div class="stat-label">سال تجربه</div></div>
-        <div class="stat-item"><div class="stat-value" id="stat2">0+</div><div class="stat-label">پروژه</div></div>
-        <div class="stat-item"><div class="stat-value" id="stat3">0+</div><div class="stat-label">ابزار و فناوری</div></div>
-      </div>
-      <div class="hero-actions">
-        <button class="btn btn-primary" onclick="downloadPDF()"><i class="fas fa-download"></i> دانلود رزومه</button>
-        <a href="#about" class="btn btn-outline"><i class="fas fa-user"></i> درباره من</a>
+
+    <div class="hero-inner">
+      <div class="hero-watermark no-print">01 / RESUME</div>
+      <div class="hero-grid-layout">
+        <!-- RIGHT: Avatar -->
+        <div class="hero-left">
+          <div class="avatar-badge-wrap">
+            <div class="avatar-ring"></div>
+            <div class="avatar-frame"><span>م.م</span></div>
+            <div class="avatar-glow-dot"></div>
+            <div class="floating-badge"><i class="fas fa-star star"></i> ۶+ سال تجربه</div>
+          </div>
+        </div>
+
+        <!-- LEFT: Info -->
+        <div class="hero-right">
+          <div class="available-badge"><span class="dot"></span> Available for opportunities</div>
+          <h1>محمد محمودی</h1>
+          <p class="role">مهندس ارشد داده و هوش تجاری</p>
+          <p class="role-en">SENIOR DATA ANALYST &middot; BI ENGINEER</p>
+
+          <div class="contact-pills">
+            <a href="tel:09919364887"><i class="fas fa-phone"></i> ۰۹۹۱۹۳۶۴۸۸۷</a>
+            <a href="mailto:mohammed1994159@gmail.com"><i class="fas fa-envelope"></i> mohammed1994159@gmail.com</a>
+            <span><i class="fas fa-map-marker-alt"></i> قم، ایران</span>
+          </div>
+
+          <div class="social-links">
+            <a href="https://github.com/mohammadmahmoudi133345-dot" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-item"><div class="stat-value" id="stat1">0+</div><div class="stat-label">سال تجربه</div></div>
+            <div class="stat-item"><div class="stat-value" id="stat2">0+</div><div class="stat-label">پروژه</div></div>
+            <div class="stat-item"><div class="stat-value" id="stat3">0+</div><div class="stat-label">ابزار و فناوری</div></div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="scroll-down no-print"><i class="fas fa-chevron-down"></i></div>
@@ -608,114 +631,130 @@
 
   </div></main>
 
-  <!-- ===== PDF VERSION (حرفه‌ای، تک برگه A4) ===== -->
+  <!-- ===== PDF VERSION (الگانت و حرفه‌ای، یک برگ A4) ===== -->
   <div id="pdf-version">
-    <div style="max-width:190mm;margin:0 auto;padding:6mm 7mm;font-family:'Vazirmatn','Tahoma',sans-serif;color:#1a1a2e;background:#fff;line-height:1.55;font-size:9pt">
-      <!-- سربرگ دوستونه: راست = نام و عنوان، چپ = مشخصات تماس -->
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4mm;padding-bottom:2.5mm;border-bottom:2.5px solid #0f766e">
-        <div>
-          <div style="font-size:15pt;font-weight:900;color:#0f766e;letter-spacing:-0.3px">محمد محمودی</div>
-          <div style="font-size:8.5pt;color:#1a1a2e;font-weight:600;margin-top:1px">مهندس ارشد داده و هوش تجاری</div>
-          <div style="font-size:7.5pt;color:#555">Senior Data Analyst &amp; BI Engineer</div>
+    <div style="max-width:190mm;margin:0 auto;padding:5mm 6mm;font-family:'Vazirmatn','Tahoma',sans-serif;color:#1a1a2e;background:#fff;line-height:1.5;font-size:9pt;position:relative">
+
+      <!-- نوار تزئینی بالا -->
+      <div style="position:absolute;top:0;left:0;right:0;height:3mm;background:linear-gradient(90deg,#0f766e,#14b8a6,#0f766e)"></div>
+
+      <!-- HEADER -->
+      <div style="display:flex;justify-content:space-between;align-items:stretch;margin-top:3mm;margin-bottom:3.5mm;padding-bottom:2.5mm;border-bottom:1.5px solid #e0e7e9">
+        <div style="border-right:3px solid #0f766e;padding-right:3mm">
+          <div style="font-size:14pt;font-weight:900;color:#0f766e;letter-spacing:-0.3px;line-height:1.2">محمد محمودی</div>
+          <div style="font-size:8pt;color:#1a1a2e;font-weight:600;margin-top:0.5mm">مهندس ارشد داده و هوش تجاری</div>
+          <div style="font-size:7pt;color:#555;margin-top:0.2mm;font-family:'JetBrains Mono',monospace">Senior Data Analyst &amp; BI Engineer</div>
         </div>
-        <div style="font-size:7.5pt;color:#444;text-align:left;line-height:1.8">
-          <div>mohammed1994159@gmail.com</div>
-          <div>۰۹۹۱۹۳۶۴۸۸۷ &nbsp;–&nbsp; قم، ایران</div>
-          <div>github.com/mohammadmahmoudi133345-dot</div>
+        <div style="font-size:7pt;color:#444;text-align:left;line-height:1.7;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #e0e7e9;padding-left:2.5mm">
+          <div><span style="color:#0f766e;font-weight:600">✉</span> mohammed1994159@gmail.com</div>
+          <div><span style="color:#0f766e;font-weight:600">📞</span> ۰۹۹۱۹۳۶۴۸۸۷</div>
+          <div><span style="color:#0f766e;font-weight:600">📍</span> قم، ایران</div>
+          <div><span style="color:#0f766e;font-weight:600"></span> github.com/mohammadmahmoudi133345-dot</div>
         </div>
       </div>
 
-      <!-- ردیف: درباره من (دو خطی) + مهارت‌های کلیدی -->
-      <div style="margin-bottom:3.5mm">
-        <div style="font-size:7.5pt;color:#0f766e;font-weight:800;letter-spacing:1px;margin-bottom:1.5mm">درباره من</div>
-        <div style="font-size:8.5pt;text-align:justify;color:#2a2a3e">
+      <!-- ABOUT -->
+      <div style="margin-bottom:3mm">
+        <div style="font-size:7pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1.5mm;margin-bottom:1mm">
+          <span style="display:inline-block;width:12px;height:2px;background:#0f766e"></span> درباره من
+        </div>
+        <div style="font-size:8pt;text-align:justify;color:#2a2a3e;padding-right:3.5mm;line-height:1.65">
           مهندس داده و تحلیلگر ارشد با <b>۶+ سال تجربه</b> در تحلیل داده، طراحی انبار داده (DW)، ETL و هوش تجاری (BI). متخصص در طراحی داشبوردهای مدیریتی با Power BI، مدل‌های داده و ارائه گزارش‌های تحلیلی. مسلط به SQL، Python و فناوری‌های داده‌های حجیم.
         </div>
       </div>
 
-      <!-- مهارت‌ها — دوتایی در یک ردیف -->
-      <div style="margin-bottom:3.5mm">
-        <div style="font-size:7.5pt;color:#0f766e;font-weight:800;letter-spacing:1px;margin-bottom:1.5mm">مهارت‌های تخصصی</div>
-        <div style="display:flex;gap:3mm">
-          <div style="flex:1;font-size:8pt;color:#2a2a3e">
-            <b style="color:#0f766e">BI &amp; Data Engineering</b><br/>
-            Power BI · SSIS · ETL · Data Warehouse · Data Mart · Data Modeling · Dashboard Design · KPI Design
-          </div>
-          <div style="flex:1;font-size:8pt;color:#2a2a3e">
-            <b style="color:#0f766e">Programming &amp; Database</b><br/>
-            Python · SQL · Pandas · NumPy · Scikit-learn · SQL Server · PostgreSQL · MongoDB · Git · REST API
-          </div>
+      <!-- SKILLS -->
+      <div style="margin-bottom:3mm">
+        <div style="font-size:7pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1.5mm;margin-bottom:1mm">
+          <span style="display:inline-block;width:12px;height:2px;background:#0f766e"></span> مهارت‌های تخصصی
         </div>
-        <div style="font-size:8pt;color:#2a2a3e;margin-top:1.5mm">
-          <b style="color:#0f766e">Big Data &amp; Others:</b> Apache Kafka · Apache Spark · Hadoop · Linux · Redis
-        </div>
-      </div>
-
-      <!-- سوابق شغلی — فشرده -->
-      <div style="margin-bottom:3.5mm">
-        <div style="font-size:7.5pt;color:#0f766e;font-weight:800;letter-spacing:1px;margin-bottom:1.5mm">سوابق شغلی</div>
-
-        <div style="margin-bottom:2.5mm">
-          <div style="display:flex;justify-content:space-between;align-items:baseline">
-            <div>
-              <b style="font-size:8.5pt;color:#1a1a2e">مهندس ارشد داده و هوش تجاری</b>
-              <span style="color:#555;font-size:7.5pt"> | Senior Data Analyst</span>
-            </div>
-            <span style="color:#0f766e;font-size:7pt;white-space:nowrap;font-weight:600">شهریور ۱۴۰۳ – تاکنون</span>
-          </div>
-          <div style="color:#0f766e;font-size:8pt;font-weight:600;margin:0.5mm 0">گروه صنعتی لینا ایران</div>
-          <ul style="margin:0;padding-right:3.5mm;font-size:8pt;color:#333;margin-top:0.5mm">
-            <li style="margin-bottom:0.3mm">طراحی و توسعه داشبوردهای مدیریتی Power BI · طراحی مدل‌های داده و Data Mart · توسعه ETL</li>
-            <li style="margin-bottom:0.3mm">تعریف و پایش KPI: فروش، تولید، مدیریت · تحلیل داده و گزارش برای مدیران ارشد</li>
-            <li>بهینه‌سازی فرآیندهای گزارش‌گیری و افزایش کیفیت داده‌ها · همکاری با ذی‌نفعان</li>
-          </ul>
-        </div>
-
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline">
-            <div>
-              <b style="font-size:8.5pt;color:#1a1a2e">تحلیلگر داده</b>
-              <span style="color:#555;font-size:7.5pt"> | Data Analyst</span>
-            </div>
-            <span style="color:#0f766e;font-size:7pt;white-space:nowrap;font-weight:600">مهر ۱۳۹۹ – تاکنون</span>
-          </div>
-          <div style="color:#0f766e;font-size:8pt;font-weight:600;margin:0.5mm 0">مجتمع صنعتی سپاهان باتری</div>
-          <ul style="margin:0;padding-right:3.5mm;font-size:8pt;color:#333;margin-top:0.5mm">
-            <li style="margin-bottom:0.3mm">طراحی ETL و انبار داده سازمانی · داشبوردهای فروش، تولید، مالی و انبار · بهینه‌سازی SQL</li>
-            <li style="margin-bottom:0.3mm">تحلیل داده‌های فروش، تولید، کیفیت و زنجیره تأمین · مشارکت در زیرساخت هوش تجاری</li>
-            <li><b style="color:#0f766e">دستاوردها:</b> طراحی DW، خودکارسازی گزارش‌ها، مشارکت در BI شرکت کیمیا پلی</li>
-          </ul>
+        <table style="width:100%;font-size:7.5pt;color:#2a2a3e;padding-right:3.5mm">
+          <tr><td style="width:58%;vertical-align:top;padding-left:2mm">
+            <b style="color:#0f766e">BI &amp; Data Engineering:</b><br/>
+            <span style="color:#444">Power BI · SSIS · ETL · Data Warehouse · Data Mart · Data Modeling · Dashboard Design · KPI Design</span>
+          </td><td style="width:42%;vertical-align:top">
+            <b style="color:#0f766e">Programming &amp; Database:</b><br/>
+            <span style="color:#444">Python · SQL · Pandas · NumPy · Scikit-learn · SQL Server · PostgreSQL · MongoDB · Git</span>
+          </td></tr>
+        </table>
+        <div style="font-size:7.5pt;color:#2a2a3e;padding-right:3.5mm;margin-top:0.5mm">
+          <b style="color:#0f766e">Big Data &amp; Others:</b> <span style="color:#444">Apache Kafka · Apache Spark · Hadoop · Linux · Redis · REST API</span>
         </div>
       </div>
 
-      <!-- ردیف پایینی سه‌ستونه: پروژه | تحصیلات | زبان + گواهینامه‌ها -->
-      <div style="display:flex;gap:3mm">
+      <!-- EXPERIENCE -->
+      <div style="margin-bottom:3mm">
+        <div style="font-size:7pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1.5mm;margin-bottom:1mm">
+          <span style="display:inline-block;width:12px;height:2px;background:#0f766e"></span> سوابق شغلی
+        </div>
+
+        <div style="padding-right:3.5mm;margin-bottom:2mm">
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <div>
+              <b style="font-size:8pt;color:#1a1a2e">مهندس ارشد داده و هوش تجاری</b>
+              <span style="color:#555;font-size:7pt"> | Senior Data Analyst</span>
+            </div>
+            <span style="color:#0f766e;font-size:6.5pt;font-weight:600;white-space:nowrap">شهریور ۱۴۰۳ – تاکنون</span>
+          </div>
+          <div style="color:#0f766e;font-size:7.5pt;font-weight:600;margin:0.3mm 0 0.5mm">گروه صنعتی لینا ایران</div>
+          <ul style="margin:0;padding-right:3mm;font-size:7.5pt;color:#444;list-style-type:'▪ '">
+            <li style="margin-bottom:0.2mm">طراحی داشبوردهای مدیریتی Power BI · طراحی مدل داده و Data Mart · توسعه ETL</li>
+            <li style="margin-bottom:0.2mm">تعریف و پایش KPI فروش، تولید و مدیریت · تحلیل داده و گزارش برای مدیران ارشد</li>
+            <li>بهینه‌سازی گزارش‌گیری و افزایش کیفیت داده‌ها · همکاری با ذی‌نفعان</li>
+          </ul>
+        </div>
+
+        <div style="padding-right:3.5mm">
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <div>
+              <b style="font-size:8pt;color:#1a1a2e">تحلیلگر داده</b>
+              <span style="color:#555;font-size:7pt"> | Data Analyst</span>
+            </div>
+            <span style="color:#0f766e;font-size:6.5pt;font-weight:600;white-space:nowrap">مهر ۱۳۹۹ – تاکنون</span>
+          </div>
+          <div style="color:#0f766e;font-size:7.5pt;font-weight:600;margin:0.3mm 0 0.5mm">مجتمع صنعتی سپاهان باتری</div>
+          <ul style="margin:0;padding-right:3mm;font-size:7.5pt;color:#444;list-style-type:'▪ '">
+            <li style="margin-bottom:0.2mm">طراحی ETL و انبار داده · داشبوردهای فروش، تولید، مالی و انبار · بهینه‌سازی SQL</li>
+            <li style="margin-bottom:0.2mm">تحلیل داده‌های فروش، تولید، کیفیت و زنجیره تأمین · مشارکت در زیرساخت BI</li>
+            <li><b style="color:#0f766e">دستاوردها:</b> طراحی DW، خودکارسازی گزارش‌ها، مشارکت در BI کیمیا پلی</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW: Project + Education + Languages/Courses -->
+      <div style="display:flex;gap:2.5mm;border-top:1px solid #e0e7e9;padding-top:2mm;margin-top:1mm">
         <div style="flex:1.1">
-          <div style="font-size:7.5pt;color:#0f766e;font-weight:800;letter-spacing:1px;margin-bottom:1mm">پروژه‌های منتخب</div>
-          <div style="font-size:8pt;color:#2a2a3e">
+          <div style="font-size:6.5pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1mm;margin-bottom:0.8mm">
+            <span style="display:inline-block;width:10px;height:2px;background:#0f766e"></span> پروژه
+          </div>
+          <div style="font-size:7.5pt;color:#2a2a3e;padding-right:3mm">
             <b>سیستم هوش تجاری کیمیا پلی</b><br/>
-            <span style="color:#444">تحلیل نیازها، طراحی مدل داده، ETL، داشبورد مدیریتی، KPI</span>
-            <span style="color:#0f766e;font-size:7pt"> (Power BI, SQL Server, SSIS)</span>
+            <span style="color:#555;font-size:7pt">تحلیل نیازها · مدل داده · ETL · داشبورد · KPI</span>
+            <span style="color:#0f766e;font-size:6.5pt"> (Power BI, SQL Server, SSIS)</span>
           </div>
         </div>
         <div style="flex:0.9">
-          <div style="font-size:7.5pt;color:#0f766e;font-weight:800;letter-spacing:1px;margin-bottom:1mm">تحصیلات</div>
-          <div style="font-size:8pt;color:#2a2a3e">
+          <div style="font-size:6.5pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1mm;margin-bottom:0.8mm">
+            <span style="display:inline-block;width:10px;height:2px;background:#0f766e"></span> تحصیلات
+          </div>
+          <div style="font-size:7.5pt;color:#2a2a3e;padding-right:3mm">
             <b>کارشناسی آمار</b><br/>
-            <span style="color:#444">دانشگاه صنعتی شاهرود</span>
-            <span style="color:#0f766e;font-size:7pt;font-weight:600"> | معدل: ۱۷.۶۵</span>
+            <span style="color:#555;font-size:7pt">دانشگاه صنعتی شاهرود</span>
+            <span style="color:#0f766e;font-size:6.5pt;font-weight:600"> · معدل: ۱۷.۶۵</span>
           </div>
         </div>
         <div style="flex:1">
-          <div style="font-size:7.5pt;color:#0f766e;font-weight:800;letter-spacing:1px;margin-bottom:1mm">زبان و مهارت‌های نرم</div>
-          <div style="font-size:8pt;color:#2a2a3e">
-            فارسی <span style="color:#555">(زبان مادری)</span> · انگلیسی <span style="color:#555">(متوسط)</span>
+          <div style="font-size:6.5pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1mm;margin-bottom:0.8mm">
+            <span style="display:inline-block;width:10px;height:2px;background:#0f766e"></span> زبان &amp; مهارت‌های نرم
           </div>
-          <div style="font-size:7.5pt;color:#555;margin-top:0.5mm">
-            تحلیل داده · تفکر تحلیلی · طراحی داشبورد · راهکارهای BI · کار تیمی · یادگیری سریع · مسئولیت‌پذیری · مدیریت زمان
+          <div style="font-size:7.5pt;color:#2a2a3e;padding-right:3mm">
+            فارسی <span style="color:#555;font-size:7pt">(زبان مادری)</span> · انگلیسی <span style="color:#555;font-size:7pt">(متوسط)</span>
           </div>
-          <div style="font-size:7pt;color:#666;margin-top:0.8mm;border-top:1px solid #ddd;padding-top:0.5mm">
-            <b>دوره‌ها:</b> Power BI Adv. · Python Data Analysis · SQL Adv. · DW Concepts · ETL/SSIS · ML Fundamentals · Big Data · Spark · Kafka
+          <div style="font-size:7pt;color:#555;padding-right:3mm;margin-top:0.3mm">
+            تحلیل داده · تفکر تحلیلی · BI · کار تیمی · یادگیری سریع · مسئولیت‌پذیری · مدیریت زمان
+          </div>
+          <div style="font-size:6.5pt;color:#666;padding-right:3mm;margin-top:0.5mm;border-top:1px dotted #ddd;padding-top:0.4mm">
+            <b>دوره‌ها:</b> Power BI Adv. · Python · SQL Adv. · DW · ETL/SSIS · ML · Big Data · Spark · Kafka
           </div>
         </div>
       </div>
@@ -783,7 +822,7 @@
       document.querySelectorAll('.stat-value').forEach(function(el){obs.observe(el);});
     })();
 
-    // PDF download using clean hidden version
+    // PDF download
     function downloadPDF(){
       var btn=document.querySelector('.download-btn');
       btn.disabled=true;
