@@ -7,7 +7,7 @@
   <meta name="description" content="رزومه محمد محمودی — مهندس ارشد داده و تحلیلگر هوش تجاری با بیش از ۶ سال تجربه" />
   <meta property="og:title" content="محمد محمودی | Senior Data Analyst & BI Engineer" />
   <meta property="og:description" content="طراحی داشبورد، انبار داده، ETL و راهکارهای هوش تجاری" />
-  <meta name="theme-color" content="#0a0a1a" />
+  <meta name="theme-color" content="#050510" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -18,28 +18,29 @@
     :root{
       --primary:#00d4aa;--primary-dark:#00b894;--primary-light:#55efc4;
       --secondary:#a29bfe;--accent:#fd79a8;
-      --bg:#080816;--bg-card:rgba(255,255,255,0.035);
-      --surface:rgba(255,255,255,0.05);--text:#e8e8f0;--text-muted:#8888a0;--text-dim:#555570;
-      --border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.14);
-      --radius:20px;--radius-sm:12px;
-      --shadow:0 8px 32px rgba(0,0,0,0.4);
-      --glow:0 0 60px rgba(0,212,170,0.12);
-      --transition:0.45s cubic-bezier(0.22,1,0.36,1);
+      --bg:#050510;--bg-card:rgba(255,255,255,0.03);
+      --surface:rgba(255,255,255,0.04);--text:#e8e8f0;--text-muted:#8888b0;--text-dim:#55557a;
+      --border:rgba(255,255,255,0.05);--border-hover:rgba(255,255,255,0.12);
+      --radius:24px;--radius-sm:14px;
+      --shadow:0 12px 48px rgba(0,0,0,0.5);
+      --glow:0 0 80px rgba(0,212,170,0.08);
+      --glow-strong:0 0 80px rgba(0,212,170,0.18);
+      --transition:0.5s cubic-bezier(0.16,1,0.3,1);
     }
     html{scroll-behavior:smooth}
     body{
       font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);
       line-height:1.9;overflow-x:hidden;min-height:100vh;
       background-image:
-        radial-gradient(ellipse 70% 45% at 50% 0%,rgba(0,212,170,0.05),transparent 60%),
-        radial-gradient(ellipse 45% 35% at 85% 100%,rgba(162,155,254,0.04),transparent 50%),
-        radial-gradient(ellipse 35% 25% at 20% 60%,rgba(253,121,168,0.025),transparent 50%);
+        radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,212,170,0.04),transparent 60%),
+        radial-gradient(ellipse 40% 30% at 85% 100%,rgba(162,155,254,0.03),transparent 50%),
+        radial-gradient(ellipse 30% 20% at 20% 70%,rgba(253,121,168,0.02),transparent 50%);
     }
-    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar{width:4px}
     ::-webkit-scrollbar-track{background:transparent}
     ::-webkit-scrollbar-thumb{background:var(--primary-dark);border-radius:10px}
     a{color:inherit;text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+    .container{max-width:1120px;margin:0 auto;padding:0 1.5rem}
 
     /* ===== HERO ===== */
     .hero{
@@ -49,189 +50,200 @@
     .hero-bg{
       position:absolute;inset:0;
       background:
-        radial-gradient(ellipse 55% 45% at 20% 20%,rgba(0,212,170,0.1),transparent 55%),
-        radial-gradient(ellipse 45% 35% at 80% 80%,rgba(162,155,254,0.08),transparent 50%),
-        radial-gradient(ellipse 25% 25% at 50% 50%,rgba(253,121,168,0.04),transparent 50%)
+        radial-gradient(ellipse 60% 50% at 20% 20%,rgba(0,212,170,0.08),transparent 55%),
+        radial-gradient(ellipse 40% 30% at 80% 80%,rgba(162,155,254,0.06),transparent 50%),
+        radial-gradient(ellipse 25% 25% at 45% 60%,rgba(253,121,168,0.03),transparent 50%);
     }
     .hero-grid{
       position:absolute;inset:0;
-      background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);
-      background-size:50px 50px;
-      mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black,transparent 70%);
-      -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black,transparent 70%)
+      background-image:linear-gradient(rgba(255,255,255,0.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.012) 1px,transparent 1px);
+      background-size:45px 45px;
+      mask-image:radial-gradient(ellipse 75% 65% at 50% 50%,black,transparent 70%);
+      -webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 50%,black,transparent 70%)
     }
     .orb{
-      position:absolute;border-radius:50%;filter:blur(90px);opacity:0.25;pointer-events:none;
-      animation:orbFloat 16s ease-in-out infinite
+      position:absolute;border-radius:50%;filter:blur(100px);opacity:0.2;pointer-events:none;
+      animation:orbFloat 20s ease-in-out infinite
     }
-    .orb:nth-child(1){width:45vw;height:45vw;background:rgba(0,212,170,0.15);top:-15%;left:-10%}
-    .orb:nth-child(2){width:38vw;height:38vw;background:rgba(162,155,254,0.12);bottom:-15%;right:-10%;animation-delay:-5s}
-    .orb:nth-child(3){width:28vw;height:28vw;background:rgba(253,121,168,0.08);top:50%;left:50%;animation-delay:-10s}
+    .orb:nth-child(1){width:50vw;height:50vw;background:rgba(0,212,170,0.12);top:-20%;left:-10%}
+    .orb:nth-child(2){width:40vw;height:40vw;background:rgba(162,155,254,0.1);bottom:-20%;right:-10%;animation-delay:-7s}
+    .orb:nth-child(3){width:30vw;height:30vw;background:rgba(253,121,168,0.06);top:45%;left:50%;animation-delay:-12s}
     @keyframes orbFloat{
       0%,100%{transform:translate(0,0) scale(1)}
-      33%{transform:translate(3%,-4%) scale(1.05)}
-      66%{transform:translate(-2%,3%) scale(0.95)}
+      33%{transform:translate(4%,-5%) scale(1.06)}
+      66%{transform:translate(-3%,4%) scale(0.94)}
     }
-    .particle{position:absolute;width:3px;height:3px;background:rgba(255,255,255,0.1);border-radius:50%;animation:particleDrift linear infinite}
+    .particle{position:absolute;width:3px;height:3px;background:rgba(255,255,255,0.08);border-radius:50%;animation:particleDrift linear infinite}
     @keyframes particleDrift{
       0%{transform:translateY(0) scale(1);opacity:0}
       10%{opacity:1}
       90%{opacity:1}
-      100%{transform:translateY(-120vh) scale(0.3);opacity:0}
+      100%{transform:translateY(-120vh) scale(0.2);opacity:0}
     }
 
-    .hero-inner{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:0 1.5rem}
-    .hero-watermark{font-size:0.6rem;font-family:'JetBrains Mono',monospace;color:var(--text-dim);letter-spacing:0.2em;margin-bottom:2rem}
-    .hero-grid-layout{display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:center}
+    .hero-inner{position:relative;z-index:2;width:100%;max-width:1120px;margin:0 auto;padding:0 1.5rem}
+    .hero-watermark{font-size:0.55rem;font-family:'JetBrains Mono',monospace;color:var(--text-dim);letter-spacing:0.25em;margin-bottom:1.8rem;opacity:0.6}
+    .hero-grid-layout{display:grid;grid-template-columns:auto 1fr;gap:3.5rem;align-items:center}
     .hero-left{text-align:center}
 
     .avatar-badge-wrap{position:relative;display:inline-block}
     .avatar-frame{
-      width:140px;height:140px;border-radius:32px;
+      width:150px;height:150px;border-radius:36px;
       background:linear-gradient(135deg,var(--primary),#6c5ce7,var(--secondary));
       display:flex;align-items:center;justify-content:center;
-      font-size:3.5rem;font-weight:900;color:#fff;
-      box-shadow:0 0 0 3px rgba(0,212,170,0.15),var(--glow);
-      position:relative;overflow:hidden
+      font-size:3.8rem;font-weight:900;color:#fff;
+      box-shadow:0 0 0 4px rgba(0,212,170,0.12),0 0 60px rgba(0,212,170,0.15);
+      position:relative;overflow:hidden;transition:var(--transition)
     }
-    .avatar-frame::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,0.25),transparent 50%);mix-blend-mode:overlay}
+    .avatar-frame:hover{transform:scale(1.02);box-shadow:0 0 0 4px rgba(0,212,170,0.2),0 0 80px rgba(0,212,170,0.25)}
+    .avatar-frame::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,0.3),transparent 50%);mix-blend-mode:overlay}
     .avatar-frame span{position:relative;z-index:1}
     .avatar-ring{
-      position:absolute;inset:-6px;border-radius:38px;
-      border:1.5px solid rgba(0,212,170,0.12);
-      animation:ringSpin 8s linear infinite
+      position:absolute;inset:-7px;border-radius:42px;
+      border:1.5px solid rgba(0,212,170,0.1);
+      animation:ringSpin 10s linear infinite
     }
     @keyframes ringSpin{to{transform:rotate(360deg)}}
-    .avatar-glow-dot{position:absolute;top:-3px;left:-3px;width:10px;height:10px;border-radius:50%;background:var(--primary);filter:blur(8px);opacity:0.7}
+    .avatar-glow-dot{position:absolute;top:-3px;left:-3px;width:12px;height:12px;border-radius:50%;background:var(--primary);filter:blur(10px);opacity:0.7}
 
     .floating-badge{
-      position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
-      background:rgba(0,212,170,0.12);border:1px solid rgba(0,212,170,0.2);
-      color:var(--primary-light);font-size:0.65rem;font-weight:700;
+      position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
+      background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.18);
+      color:var(--primary-light);font-size:0.6rem;font-weight:700;
       padding:0.2rem 0.9rem;border-radius:50px;white-space:nowrap;
-      display:flex;align-items:center;gap:0.35rem
+      display:flex;align-items:center;gap:0.35rem;backdrop-filter:blur(8px)
     }
-    .floating-badge .star{font-size:0.55rem}
+    .floating-badge .star{font-size:0.5rem}
 
     .hero-right{text-align:right}
     .available-badge{
-      display:inline-flex;align-items:center;gap:0.4rem;
-      font-size:0.7rem;font-family:'JetBrains Mono',monospace;
-      color:var(--primary);margin-bottom:1rem
+      display:inline-flex;align-items:center;gap:0.45rem;
+      font-size:0.68rem;font-family:'JetBrains Mono',monospace;
+      color:var(--primary);margin-bottom:1rem;padding:0.15rem 0.6rem;
+      border-radius:50px;background:rgba(0,212,170,0.04);border:1px solid rgba(0,212,170,0.08)
     }
-    .available-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 12px var(--primary);animation:pulse 2s ease-in-out infinite}
-    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
+    .available-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 14px var(--primary);animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.2;transform:scale(0.6)}}
 
     .hero-right h1{
-      font-size:3.2rem;font-weight:900;line-height:1.1;
-      background:linear-gradient(135deg,#fff 30%,var(--primary-light),var(--secondary));
+      font-size:3.4rem;font-weight:900;line-height:1.1;
+      background:linear-gradient(135deg,#fff 25%,var(--primary-light) 55%,var(--secondary) 85%);
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      margin-bottom:0.3rem
+      margin-bottom:0.25rem
     }
-    .hero-right .role{font-size:1.2rem;color:rgba(255,255,255,0.7);font-weight:600;margin-bottom:0.1rem}
-    .hero-right .role-en{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--text-dim);letter-spacing:0.15em;margin-bottom:1.5rem}
+    .hero-right .role{font-size:1.25rem;color:rgba(255,255,255,0.65);font-weight:600;margin-bottom:0.05rem}
+    .hero-right .role-en{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-dim);letter-spacing:0.18em;margin-bottom:1.5rem}
 
-    .contact-pills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem}
+    .contact-pills{display:flex;flex-wrap:wrap;gap:0.45rem;margin-bottom:0.8rem}
     .contact-pills a,.contact-pills span{
       display:inline-flex;align-items:center;gap:0.3rem;
       padding:0.3rem 0.8rem;border-radius:50px;
-      background:rgba(255,255,255,0.03);border:1px solid var(--border);
-      color:var(--text-muted);font-size:0.78rem;transition:var(--transition)
+      background:rgba(255,255,255,0.025);border:1px solid var(--border);
+      color:var(--text-muted);font-size:0.75rem;transition:var(--transition)
     }
-    .contact-pills a:hover{background:rgba(0,212,170,0.07);border-color:rgba(0,212,170,0.18);color:var(--primary-light);transform:translateY(-2px)}
-    .contact-pills i{width:12px;font-size:0.7rem}
+    .contact-pills a:hover{background:rgba(0,212,170,0.06);border-color:rgba(0,212,170,0.15);color:var(--primary-light);transform:translateY(-2px)}
+    .contact-pills i{width:12px;font-size:0.65rem}
 
-    .social-links{display:flex;gap:0.6rem;margin-bottom:1.5rem}
+    .social-links{display:flex;gap:0.55rem;margin-bottom:1.5rem}
     .social-links a{
-      width:34px;height:34px;border-radius:50%;
-      background:rgba(255,255,255,0.03);border:1px solid var(--border);
+      width:36px;height:36px;border-radius:50%;
+      background:rgba(255,255,255,0.025);border:1px solid var(--border);
       display:flex;align-items:center;justify-content:center;
-      color:var(--text-muted);font-size:0.8rem;transition:var(--transition)
+      color:var(--text-muted);font-size:0.85rem;transition:var(--transition)
     }
-    .social-links a:hover{background:rgba(0,212,170,0.08);border-color:rgba(0,212,170,0.2);color:var(--primary);transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,212,170,0.1)}
+    .social-links a:hover{background:rgba(0,212,170,0.07);border-color:rgba(0,212,170,0.18);color:var(--primary);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,212,170,0.08)}
 
     .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:320px}
     .stat-item{text-align:center}
-    .stat-value{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
-    .stat-label{font-size:0.68rem;color:var(--text-dim);margin-top:0.1rem}
+    .stat-value{font-family:'JetBrains Mono',monospace;font-size:1.9rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
+    .stat-label{font-size:0.65rem;color:var(--text-dim);margin-top:0.1rem;font-weight:500}
 
     .scroll-down{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);color:var(--text-dim);font-size:1.1rem;animation:scrollBounce 2.4s ease-in-out infinite}
-    @keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0);opacity:0.5}50%{transform:translateX(-50%) translateY(8px);opacity:1}}
+    @keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0);opacity:0.4}50%{transform:translateX(-50%) translateY(8px);opacity:1}}
 
     /* ===== SECTIONS ===== */
-    section{padding:4.5rem 0}
+    section{padding:5rem 0}
     .section-header{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem}
     .section-icon{
-      width:42px;height:42px;border-radius:14px;
-      background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.1);
+      width:44px;height:44px;border-radius:14px;
+      background:rgba(0,212,170,0.05);border:1px solid rgba(0,212,170,0.08);
       display:flex;align-items:center;justify-content:center;
-      color:var(--primary);font-size:1rem;flex-shrink:0
+      color:var(--primary);font-size:1rem;flex-shrink:0;transition:var(--transition)
     }
+    .section-header:hover .section-icon{background:rgba(0,212,170,0.08);border-color:rgba(0,212,170,0.14);transform:translateY(-2px)}
     .section-title-group{display:flex;align-items:baseline;gap:0.7rem;flex-wrap:wrap}
-    .section-title-group h2{font-size:1.6rem;font-weight:800}
+    .section-title-group h2{font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,var(--text),rgba(255,255,255,0.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .section-title-group .en{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);letter-spacing:0.15em;text-transform:uppercase}
-    .section-line{flex:1;height:1px;background:linear-gradient(to left,transparent,var(--border),transparent)}
+    .section-line{flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(0,212,170,0.12),transparent)}
+    .section-divider{width:40px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--primary),var(--secondary));margin:0 0 1.5rem 0}
 
     /* ===== CARDS ===== */
     .card{
       background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
-      backdrop-filter:blur(12px);transition:var(--transition)
+      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      transition:var(--transition);position:relative;overflow:hidden
     }
-    .card:hover{border-color:var(--border-hover);transform:translateY(-3px);box-shadow:var(--shadow)}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,170,0.08),transparent);opacity:0;transition:var(--transition)}
+    .card:hover::before{opacity:1}
+    .card:hover{border-color:var(--border-hover);transform:translateY(-4px);box-shadow:var(--shadow),0 0 40px rgba(0,212,170,0.03)}
 
     /* ===== ABOUT ===== */
-    .about-text{font-size:1rem;line-height:2.1;color:rgba(255,255,255,0.72);text-align:justify}
-    .about-text strong{color:var(--primary);font-weight:700}
+    .about-text{font-size:1rem;line-height:2.15;color:rgba(255,255,255,0.7);text-align:justify}
+    .about-text strong{color:var(--primary);font-weight:700;position:relative}
+    .about-text strong::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(0,212,170,0.15);border-radius:2px}
 
     /* ===== SKILLS ===== */
     .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1rem}
-    .skill-card{padding:1.3rem 1.5rem}
-    .skill-card h3{font-size:0.9rem;font-weight:700;margin-bottom:0.9rem;display:flex;align-items:center;gap:0.5rem}
+    .skill-card{padding:1.4rem 1.6rem}
+    .skill-card h3{font-size:0.88rem;font-weight:700;margin-bottom:0.9rem;display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.85)}
     .skill-card h3 i{color:var(--primary);font-size:0.85rem}
-    .skill-item{margin-bottom:0.6rem}.skill-item:last-child{margin-bottom:0}
-    .skill-item .meta{display:flex;justify-content:space-between;font-size:0.75rem;margin-bottom:0.25rem}
-    .skill-item .name{font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.65)}
+    .skill-item{margin-bottom:0.55rem}.skill-item:last-child{margin-bottom:0}
+    .skill-item .meta{display:flex;justify-content:space-between;font-size:0.73rem;margin-bottom:0.25rem}
+    .skill-item .name{font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.55)}
     .skill-item .pct{color:var(--primary);font-family:'JetBrains Mono',monospace}
-    .skill-bar{height:3px;border-radius:3px;background:rgba(255,255,255,0.04);overflow:hidden}
-    .skill-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--primary),var(--primary-light));width:0;transition:width 1.2s cubic-bezier(0.2,0.8,0.2,1)}
+    .skill-bar{height:4px;border-radius:4px;background:rgba(255,255,255,0.03);overflow:hidden;position:relative}
+    .skill-bar::after{content:'';position:absolute;inset:0;border-radius:4px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent)}
+    .skill-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--primary-dark),var(--primary),var(--primary-light));width:0;transition:width 1.4s cubic-bezier(0.16,1,0.3,1);position:relative}
+    .skill-fill::after{content:'';position:absolute;right:0;top:-1px;bottom:-1px;width:6px;border-radius:3px;background:var(--primary-light);filter:blur(3px)}
 
     /* ===== TIMELINE ===== */
-    .timeline{position:relative;padding-right:2.2rem}
+    .timeline{position:relative;padding-right:2.3rem}
     .timeline-line{
       position:absolute;right:7px;top:0.5rem;bottom:0.5rem;width:2px;
-      background:linear-gradient(to bottom,transparent,rgba(0,212,170,0.25) 15%,rgba(162,155,254,0.15) 60%,transparent);
+      background:linear-gradient(to bottom,transparent,rgba(0,212,170,0.2) 15%,rgba(162,155,254,0.12) 60%,transparent);
       border-radius:4px;overflow:hidden
     }
-    .timeline-line::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.3),transparent);background-size:100% 40%;background-repeat:no-repeat;animation:shine 3.6s ease-in-out infinite}
+    .timeline-line::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.25),transparent);background-size:100% 40%;background-repeat:no-repeat;animation:shine 4s ease-in-out infinite}
     @keyframes shine{0%{background-position:0 -30%}100%{background-position:0 130%}}
-    .timeline-item{position:relative;margin-bottom:1.5rem;opacity:0;transform:translateY(16px);animation:fadeUp 0.7s cubic-bezier(0.2,0.8,0.2,1) forwards}
-    .timeline-item:nth-child(2){animation-delay:0.15s}
+    .timeline-item{position:relative;margin-bottom:1.5rem;opacity:0;transform:translateY(16px);animation:fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards}
+    .timeline-item:nth-child(2){animation-delay:0.2s}
     @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-    .timeline-dot{position:absolute;right:-1.95rem;top:1.8rem;width:13px;height:13px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--secondary));box-shadow:0 0 0 4px var(--bg),0 0 20px rgba(0,212,170,0.3);z-index:1}
-    .timeline-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:rgba(0,212,170,0.2);animation:dotPulse 2.4s ease-out infinite}
-    @keyframes dotPulse{0%{transform:scale(0.6);opacity:0.8}100%{transform:scale(2.2);opacity:0}}
-    .timeline-card{padding:1.5rem 1.8rem}
+    .timeline-dot{position:absolute;right:-2rem;top:1.8rem;width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--secondary));box-shadow:0 0 0 5px var(--bg),0 0 25px rgba(0,212,170,0.25);z-index:1}
+    .timeline-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:rgba(0,212,170,0.15);animation:dotPulse 2.6s ease-out infinite}
+    @keyframes dotPulse{0%{transform:scale(0.6);opacity:0.8}100%{transform:scale(2.4);opacity:0}}
+    .timeline-card{padding:1.6rem 2rem}
     .exp-header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:0.8rem;padding-bottom:0.8rem;margin-bottom:0.8rem;border-bottom:1px solid var(--border)}
     .exp-header h3{font-size:1.1rem;font-weight:700}
-    .exp-header .role-en{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--primary);margin-top:0.15rem}
-    .exp-header .company{font-size:0.82rem;color:var(--text-muted);margin-top:0.25rem}
-    .exp-header .period{font-family:'JetBrains Mono',monospace;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:50px;background:rgba(255,255,255,0.03);border:1px solid var(--border);white-space:nowrap;color:var(--text-muted)}
+    .exp-header .role-en{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--primary);margin-top:0.15rem;letter-spacing:0.05em}
+    .exp-header .company{font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem}
+    .exp-header .period{font-family:'JetBrains Mono',monospace;font-size:0.7rem;padding:0.25rem 0.7rem;border-radius:50px;background:rgba(255,255,255,0.025);border:1px solid var(--border);white-space:nowrap;color:var(--text-muted)}
     .exp-list{list-style:none}
-    .exp-list li{display:flex;gap:0.5rem;align-items:flex-start;font-size:0.85rem;color:rgba(255,255,255,0.68);line-height:1.85;margin-bottom:0.25rem}
+    .exp-list li{display:flex;gap:0.5rem;align-items:flex-start;font-size:0.85rem;color:rgba(255,255,255,0.65);line-height:1.85;margin-bottom:0.25rem}
     .exp-list li:last-child{margin-bottom:0}
     .exp-list li .arrow{color:var(--primary);margin-top:0.3rem;flex-shrink:0;font-size:0.65rem}
+    .exp-list li:hover .arrow{color:var(--primary-light)}
     .achievements{margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid var(--border)}
-    .achievements h4{font-size:0.75rem;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:0.35rem;margin-bottom:0.4rem}
+    .achievements h4{font-size:0.72rem;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:0.35rem;margin-bottom:0.4rem}
     .achievements ul{list-style:none}
-    .achievements ul li{display:flex;gap:0.45rem;align-items:flex-start;font-size:0.82rem;color:rgba(255,255,255,0.62);line-height:1.75}
+    .achievements ul li{display:flex;gap:0.45rem;align-items:flex-start;font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.75}
     .achievements ul li .star{color:var(--accent);flex-shrink:0;font-size:0.6rem;margin-top:0.25rem}
     .tech-stack{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid var(--border)}
-    .tech-stack span{font-family:'JetBrains Mono',monospace;font-size:0.65rem;padding:0.18rem 0.55rem;border-radius:5px;background:rgba(0,212,170,0.05);border:1px solid rgba(0,212,170,0.08);color:var(--primary);transition:var(--transition)}
-    .tech-stack span:hover{background:rgba(0,212,170,0.1)}
+    .tech-stack span{font-family:'JetBrains Mono',monospace;font-size:0.62rem;padding:0.18rem 0.55rem;border-radius:6px;background:rgba(0,212,170,0.04);border:1px solid rgba(0,212,170,0.06);color:var(--primary);transition:var(--transition)}
+    .tech-stack span:hover{background:rgba(0,212,170,0.08);border-color:rgba(0,212,170,0.12);transform:translateY(-1px)}
 
     /* ===== PROJECT ===== */
-    .project-card{padding:1.5rem 1.8rem;position:relative;overflow:hidden}
-    .project-card::before{content:'';position:absolute;top:-50px;left:-50px;width:120px;height:120px;border-radius:50%;border:1px solid rgba(0,212,170,0.04)}
+    .project-card{padding:1.6rem 2rem;position:relative;overflow:hidden}
+    .project-card::before{content:'';position:absolute;top:-60px;left:-60px;width:140px;height:140px;border-radius:50%;border:1px solid rgba(0,212,170,0.03)}
     .project-card h3{font-size:1.05rem;font-weight:700;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem}
     .project-card h3 i{color:var(--primary)}
     .project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:0.3rem 1rem;margin-bottom:0.8rem}
@@ -240,11 +252,11 @@
 
     /* ===== EDUCATION & LANGUAGES ===== */
     .edu-lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    .edu-card,.lang-card{padding:1.3rem 1.5rem}
+    .edu-card,.lang-card{padding:1.4rem 1.6rem}
     .edu-card h3{font-size:0.95rem;font-weight:700;margin-bottom:0.15rem;display:flex;align-items:center;gap:0.45rem}
     .edu-card h3 i{color:var(--primary)}
     .edu-card .school{font-size:0.82rem;color:var(--text-muted)}
-    .edu-card .gpa{display:inline-flex;align-items:center;gap:0.25rem;margin-top:0.4rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--primary);padding:0.15rem 0.7rem;border-radius:50px;background:rgba(0,212,170,0.05);border:1px solid rgba(0,212,170,0.08)}
+    .edu-card .gpa{display:inline-flex;align-items:center;gap:0.25rem;margin-top:0.4rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--primary);padding:0.15rem 0.7rem;border-radius:50px;background:rgba(0,212,170,0.04);border:1px solid rgba(0,212,170,0.06)}
     .lang-item{display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0}
     .lang-item:first-child{padding-top:0}.lang-item:last-child{padding-bottom:0}
     .lang-item:not(:last-child){border-bottom:1px solid var(--border)}
@@ -253,58 +265,56 @@
 
     /* ===== COURSES ===== */
     .courses-wrap{display:flex;flex-wrap:wrap;gap:0.45rem}
-    .course-badge{font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:0.35rem 0.9rem;border-radius:8px;background:rgba(255,255,255,0.025);border:1px solid var(--border);color:var(--text-muted);transition:var(--transition)}
-    .course-badge:hover{background:rgba(0,212,170,0.05);border-color:rgba(0,212,170,0.12);color:var(--primary);transform:translateY(-2px)}
+    .course-badge{font-family:'JetBrains Mono',monospace;font-size:0.72rem;padding:0.35rem 0.9rem;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid var(--border);color:var(--text-muted);transition:var(--transition)}
+    .course-badge:hover{background:rgba(0,212,170,0.04);border-color:rgba(0,212,170,0.1);color:var(--primary);transform:translateY(-2px)}
 
     /* ===== TRAITS ===== */
-    .traits-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.7rem}
-    .trait-card{padding:1.1rem 0.8rem;text-align:center;border-radius:var(--radius-sm);background:var(--bg-card);border:1px solid var(--border);transition:var(--transition)}
-    .trait-card:hover{border-color:rgba(0,212,170,0.15);transform:translateY(-3px);box-shadow:var(--shadow)}
-    .trait-card i{font-size:1.2rem;color:var(--primary);margin-bottom:0.4rem;display:block}
-    .trait-card span{font-size:0.78rem;font-weight:600}
+    .traits-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:0.7rem}
+    .trait-card{padding:1.1rem 0.8rem;text-align:center;border-radius:var(--radius-sm);background:var(--bg-card);border:1px solid var(--border);transition:var(--transition);position:relative;overflow:hidden}
+    .trait-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(0,212,170,0.03),transparent 60%);opacity:0;transition:var(--transition)}
+    .trait-card:hover::before{opacity:1}
+    .trait-card:hover{border-color:rgba(0,212,170,0.12);transform:translateY(-4px);box-shadow:var(--shadow)}
+    .trait-card i{font-size:1.2rem;color:var(--primary);margin-bottom:0.4rem;display:block;transition:var(--transition)}
+    .trait-card:hover i{transform:scale(1.15);color:var(--primary-light)}
+    .trait-card span{font-size:0.75rem;font-weight:600}
 
     /* ===== FOOTER ===== */
-    .site-footer{padding:1.8rem 0;margin-top:2.5rem;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;font-size:0.75rem;color:var(--text-dim)}
+    .site-footer{padding:2rem 0;margin-top:3rem;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;font-size:0.72rem;color:var(--text-dim)}
     .site-footer a{color:var(--text-dim);transition:var(--transition)}
     .site-footer a:hover{color:var(--primary)}
 
+    /* ===== FLOATING DOWNLOAD BUTTON ===== */
+    .float-dl{
+      position:fixed;bottom:2rem;left:2rem;z-index:100;
+      display:inline-flex;align-items:center;gap:0.5rem;
+      padding:0.7rem 1.4rem;border-radius:50px;
+      background:linear-gradient(135deg,var(--primary),#00a381);
+      color:#050510;border:none;cursor:pointer;
+      font-family:inherit;font-size:0.82rem;font-weight:700;
+      box-shadow:0 4px 30px rgba(0,212,170,0.3),0 0 60px rgba(0,212,170,0.08);
+      transition:var(--transition);opacity:0;transform:translateY(20px) scale(0.9);pointer-events:none
+    }
+    .float-dl.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+    .float-dl:hover{transform:translateY(-2px) scale(1.03);filter:brightness(1.1);box-shadow:0 8px 40px rgba(0,212,170,0.4)}
+    .float-dl:active{transform:scale(0.97)}
+    .float-dl i{font-size:0.8rem}
+
     /* ===== SCROLL TOP ===== */
     .scroll-top{
-      position:fixed;bottom:1.5rem;left:1.5rem;z-index:100;
-      width:40px;height:40px;border-radius:50%;
-      background:linear-gradient(135deg,var(--primary),#00a381);
-      color:#0a0a1a;border:none;cursor:pointer;
+      position:fixed;bottom:2rem;right:2rem;z-index:100;
+      width:42px;height:42px;border-radius:50%;
+      background:rgba(255,255,255,0.04);border:1px solid var(--border);
+      color:var(--text-muted);cursor:pointer;
       display:flex;align-items:center;justify-content:center;
-      font-size:0.9rem;box-shadow:var(--glow);
+      font-size:0.9rem;backdrop-filter:blur(12px);
       opacity:0;transform:translateY(20px);
       transition:var(--transition);pointer-events:none
     }
     .scroll-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
-    .scroll-top:hover{transform:translateY(-3px) scale(1.05)}
-
-    /* ===== DOWNLOAD BAR ===== */
-    .download-bar{position:fixed;top:1rem;left:1rem;right:1rem;z-index:50;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
-    .download-bar .brand{
-      pointer-events:auto;display:none;align-items:center;gap:0.4rem;
-      padding:0.35rem 0.9rem;border-radius:50px;
-      background:rgba(255,255,255,0.03);border:1px solid var(--border);
-      font-size:0.68rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace
-    }
-    .download-bar .brand i{color:var(--primary);font-size:0.65rem}
-    @media(min-width:640px){.download-bar .brand{display:flex}}
-    .download-btn{
-      pointer-events:auto;display:inline-flex;align-items:center;gap:0.45rem;
-      padding:0.55rem 1.3rem;border-radius:50px;
-      background:linear-gradient(135deg,var(--primary),#00a381);
-      color:#0a0a1a;border:none;cursor:pointer;
-      font-family:inherit;font-size:0.82rem;font-weight:600;
-      box-shadow:var(--glow);transition:var(--transition)
-    }
-    .download-btn:hover{transform:scale(1.02);filter:brightness(1.1)}
-    .download-btn:active{transform:scale(0.97)}
+    .scroll-top:hover{background:rgba(0,212,170,0.06);border-color:rgba(0,212,170,0.15);color:var(--primary);transform:translateY(-3px)}
 
     /* ===== REVEAL ===== */
-    .reveal{opacity:0;transform:translateY(25px);transition:opacity 0.7s ease,transform 0.7s ease}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(0.16,1,0.3,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
 
     /* ===== PDF VERSION (hidden on screen) ===== */
@@ -314,38 +324,45 @@
     @media(max-width:900px){
       .hero-grid-layout{grid-template-columns:1fr;gap:1.5rem;text-align:center}
       .hero-right{text-align:center}
-      .hero-right h1{font-size:2.2rem}
+      .hero-right h1{font-size:2.4rem}
       .contact-pills,.social-links,.stats-row{justify-content:center;margin-left:auto;margin-right:auto}
       .available-badge{justify-content:center}
     }
     @media(max-width:768px){
-      .hero-right h1{font-size:1.8rem}
-      .hero-right .role{font-size:0.95rem}
-      .stat-value{font-size:1.5rem}
-      .avatar-frame{width:110px;height:110px;font-size:2.8rem}
-      section{padding:2.5rem 0}
+      .hero-right h1{font-size:2rem}
+      .hero-right .role{font-size:1rem}
+      .stat-value{font-size:1.6rem}
+      .avatar-frame{width:115px;height:115px;font-size:3rem;border-radius:28px}
+      .avatar-ring{border-radius:34px}
+      section{padding:3rem 0}
       .section-title-group h2{font-size:1.3rem}
       .skills-grid{grid-template-columns:1fr}
       .edu-lang-grid{grid-template-columns:1fr}
       .traits-grid{grid-template-columns:repeat(2,1fr)}
       .project-grid{grid-template-columns:1fr}
+      .float-dl{bottom:1.2rem;left:1.2rem;padding:0.55rem 1.1rem;font-size:0.75rem}
+      .scroll-top{bottom:1.2rem;right:1.2rem;width:38px;height:38px}
     }
     @media(max-width:480px){
-      .contact-pills a,.contact-pills span{font-size:0.72rem;padding:0.25rem 0.6rem}
+      .hero-right h1{font-size:1.6rem}
+      .contact-pills a,.contact-pills span{font-size:0.7rem;padding:0.25rem 0.6rem}
       .exp-header h3{font-size:0.95rem}
       .section-icon{width:36px;height:36px;font-size:0.85rem}
     }
 
-    /* ===== PRINT (browser Ctrl+P) ===== */
+    /* ===== PRINT ===== */
     @media print{
       @page{size:A4;margin:10mm}
       body{background:#fff!important;color:#111!important}
-      .no-print,.orb,.hero-grid,.particle,.scroll-down,.download-bar,.scroll-top{display:none!important}
+      .no-print,.orb,.hero-grid,.particle,.scroll-down,.float-dl,.scroll-top{display:none!important}
       .hero{min-height:auto!important;padding:0!important}
       .card,.skill-card,.timeline-card,.project-card,.edu-card,.lang-card,.trait-card{background:#fff!important;border:1px solid #ddd!important;box-shadow:none!important;transform:none!important;backdrop-filter:none!important}
-      .hero-right h1,.stat-value{background:none!important;-webkit-text-fill-color:#0e7490!important;color:#0e7490!important}
+      .card::before{display:none}
+      .hero-right h1,.stat-value,.section-title-group h2{background:none!important;-webkit-text-fill-color:#0e7490!important;color:#0e7490!important}
       .skill-fill{background:#0e7490!important}
+      .skill-fill::after{display:none}
       .about-text,.exp-list li,.project-grid li,.achievements ul li{color:#444!important}
+      .about-text strong::after{display:none}
       .tech-stack span,.course-badge{border-color:#ddd!important;color:#555!important;background:#f5f5f5!important}
       section{padding:1rem 0!important;page-break-inside:avoid}
       .timeline-dot{box-shadow:0 0 0 4px #fff!important}
@@ -363,14 +380,11 @@
 </head>
 <body>
 
-  <!-- Download bar -->
-  <div class="download-bar no-print">
-    <div class="brand"><i class="fas fa-sparkles"></i><span>portfolio.v1</span></div>
-    <button class="download-btn" onclick="downloadPDF()"><i class="fas fa-download"></i> دانلود رزومه (PDF)</button>
-  </div>
-
   <!-- Scroll to top -->
   <button class="scroll-top no-print" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="بازگشت به بالا"><i class="fas fa-arrow-up"></i></button>
+
+  <!-- Floating download button -->
+  <button class="float-dl no-print" id="floatDl" onclick="downloadPDF()"><i class="fas fa-download"></i> دانلود PDF</button>
 
   <!-- ===== HERO ===== -->
   <header class="hero" id="home">
@@ -380,7 +394,7 @@
     <div class="no-print" id="particles"></div>
 
     <div class="hero-inner">
-      <div class="hero-watermark no-print">01 / RESUME</div>
+      <div class="hero-watermark no-print">✦ RESUME / ۰۱</div>
       <div class="hero-grid-layout">
         <!-- RIGHT: Avatar -->
         <div class="hero-left">
@@ -429,7 +443,7 @@
         <div class="section-title-group"><h2>درباره من</h2><span class="en">/ About</span></div>
         <div class="section-line"></div>
       </div>
-      <div class="card" style="padding:1.8rem">
+      <div class="card" style="padding:2rem">
         <p class="about-text">مهندس داده و تحلیلگر ارشد داده با بیش از <strong>۶ سال تجربه</strong> در حوزه تحلیل داده، طراحی انبار داده (Data Warehouse)، توسعه فرآیندهای ETL و پیاده‌سازی راهکارهای هوش تجاری (BI). متخصص در طراحی داشبوردهای مدیریتی و عملیاتی با <strong>Power BI</strong>، توسعه مدل‌های داده، تحلیل داده‌های کسب‌وکار و ارائه گزارش‌های تحلیلی جهت پشتیبانی از تصمیم‌گیری مدیران. مسلط به <strong>SQL، Python</strong> و فناوری‌های داده‌های حجیم و علاقه‌مند به طراحی سیستم‌های داده‌محور و بهینه‌سازی فرآیندهای سازمانی.</p>
       </div>
     </section>
@@ -631,21 +645,20 @@
 
   </div></main>
 
-  <!-- ===== PDF VERSION (الگانت و حرفه‌ای، یک برگ A4) ===== -->
+  <!-- ===== PDF VERSION ===== -->
   <div id="pdf-version">
-    <div style="max-width:190mm;margin:0 auto;padding:5mm 6mm;font-family:'Vazirmatn','Tahoma',sans-serif;color:#1a1a2e;background:#fff;line-height:1.5;font-size:9pt;position:relative">
+    <div style="max-width:190mm;margin:0 auto;padding:4mm 5.5mm;font-family:'Vazirmatn','Tahoma',sans-serif;color:#1a1a2e;background:#fff;line-height:1.45;font-size:8.5pt;position:relative">
 
-      <!-- نوار تزئینی بالا -->
-      <div style="position:absolute;top:0;left:0;right:0;height:3mm;background:linear-gradient(90deg,#0f766e,#14b8a6,#0f766e)"></div>
+      <div style="position:absolute;top:0;left:0;right:0;height:2.5mm;background:linear-gradient(90deg,#0f766e,#14b8a6,#0f766e)"></div>
 
       <!-- HEADER -->
-      <div style="display:flex;justify-content:space-between;align-items:stretch;margin-top:3mm;margin-bottom:3.5mm;padding-bottom:2.5mm;border-bottom:1.5px solid #e0e7e9">
-        <div style="border-right:3px solid #0f766e;padding-right:3mm">
-          <div style="font-size:14pt;font-weight:900;color:#0f766e;letter-spacing:-0.3px;line-height:1.2">محمد محمودی</div>
-          <div style="font-size:8pt;color:#1a1a2e;font-weight:600;margin-top:0.5mm">مهندس ارشد داده و هوش تجاری</div>
-          <div style="font-size:7pt;color:#555;margin-top:0.2mm;font-family:'JetBrains Mono',monospace">Senior Data Analyst &amp; BI Engineer</div>
+      <div style="display:flex;justify-content:space-between;align-items:stretch;margin-top:2.5mm;margin-bottom:3mm;padding-bottom:2mm;border-bottom:1.5px solid #dce3e5">
+        <div style="border-right:3px solid #0f766e;padding-right:2.5mm">
+          <div style="font-size:13pt;font-weight:900;color:#0f766e;letter-spacing:-0.3px;line-height:1.2">محمد محمودی</div>
+          <div style="font-size:7.5pt;color:#1a1a2e;font-weight:600;margin-top:0.4mm">مهندس ارشد داده و هوش تجاری</div>
+          <div style="font-size:6.5pt;color:#555;margin-top:0.2mm;font-family:'JetBrains Mono',monospace">Senior Data Analyst &amp; BI Engineer</div>
         </div>
-        <div style="font-size:7pt;color:#444;text-align:left;line-height:1.7;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #e0e7e9;padding-left:2.5mm">
+        <div style="font-size:6.5pt;color:#444;text-align:left;line-height:1.65;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #dce3e5;padding-left:2mm">
           <div><span style="color:#0f766e;font-weight:600">✉</span> mohammed1994159@gmail.com</div>
           <div><span style="color:#0f766e;font-weight:600">📞</span> ۰۹۹۱۹۳۶۴۸۸۷</div>
           <div><span style="color:#0f766e;font-weight:600">📍</span> قم، ایران</div>
@@ -654,21 +667,21 @@
       </div>
 
       <!-- ABOUT -->
-      <div style="margin-bottom:3mm">
-        <div style="font-size:7pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1.5mm;margin-bottom:1mm">
-          <span style="display:inline-block;width:12px;height:2px;background:#0f766e"></span> درباره من
+      <div style="margin-bottom:2.5mm">
+        <div style="font-size:6.5pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1.5mm;margin-bottom:0.8mm">
+          <span style="display:inline-block;width:10px;height:1.5px;background:#0f766e"></span> درباره من
         </div>
-        <div style="font-size:8pt;text-align:justify;color:#2a2a3e;padding-right:3.5mm;line-height:1.65">
+        <div style="font-size:7.5pt;text-align:justify;color:#2a2a3e;padding-right:3mm;line-height:1.6">
           مهندس داده و تحلیلگر ارشد با <b>۶+ سال تجربه</b> در تحلیل داده، طراحی انبار داده (DW)، ETL و هوش تجاری (BI). متخصص در طراحی داشبوردهای مدیریتی با Power BI، مدل‌های داده و ارائه گزارش‌های تحلیلی. مسلط به SQL، Python و فناوری‌های داده‌های حجیم.
         </div>
       </div>
 
       <!-- SKILLS -->
-      <div style="margin-bottom:3mm">
-        <div style="font-size:7pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1.5mm;margin-bottom:1mm">
-          <span style="display:inline-block;width:12px;height:2px;background:#0f766e"></span> مهارت‌های تخصصی
+      <div style="margin-bottom:2.5mm">
+        <div style="font-size:6.5pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1.5mm;margin-bottom:0.8mm">
+          <span style="display:inline-block;width:10px;height:1.5px;background:#0f766e"></span> مهارت‌های تخصصی
         </div>
-        <table style="width:100%;font-size:7.5pt;color:#2a2a3e;padding-right:3.5mm">
+        <table style="width:100%;font-size:7pt;color:#2a2a3e;padding-right:3mm">
           <tr><td style="width:58%;vertical-align:top;padding-left:2mm">
             <b style="color:#0f766e">BI &amp; Data Engineering:</b><br/>
             <span style="color:#444">Power BI · SSIS · ETL · Data Warehouse · Data Mart · Data Modeling · Dashboard Design · KPI Design</span>
@@ -677,83 +690,83 @@
             <span style="color:#444">Python · SQL · Pandas · NumPy · Scikit-learn · SQL Server · PostgreSQL · MongoDB · Git</span>
           </td></tr>
         </table>
-        <div style="font-size:7.5pt;color:#2a2a3e;padding-right:3.5mm;margin-top:0.5mm">
+        <div style="font-size:7pt;color:#2a2a3e;padding-right:3mm;margin-top:0.4mm">
           <b style="color:#0f766e">Big Data &amp; Others:</b> <span style="color:#444">Apache Kafka · Apache Spark · Hadoop · Linux · Redis · REST API</span>
         </div>
       </div>
 
       <!-- EXPERIENCE -->
-      <div style="margin-bottom:3mm">
-        <div style="font-size:7pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1.5mm;margin-bottom:1mm">
-          <span style="display:inline-block;width:12px;height:2px;background:#0f766e"></span> سوابق شغلی
+      <div style="margin-bottom:2.5mm">
+        <div style="font-size:6.5pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1.5mm;margin-bottom:0.8mm">
+          <span style="display:inline-block;width:10px;height:1.5px;background:#0f766e"></span> سوابق شغلی
         </div>
 
-        <div style="padding-right:3.5mm;margin-bottom:2mm">
+        <div style="padding-right:3mm;margin-bottom:1.5mm">
           <div style="display:flex;justify-content:space-between;align-items:baseline">
             <div>
-              <b style="font-size:8pt;color:#1a1a2e">مهندس ارشد داده و هوش تجاری</b>
-              <span style="color:#555;font-size:7pt"> | Senior Data Analyst</span>
+              <b style="font-size:7.5pt;color:#1a1a2e">مهندس ارشد داده و هوش تجاری</b>
+              <span style="color:#555;font-size:6.5pt"> | Senior Data Analyst</span>
             </div>
-            <span style="color:#0f766e;font-size:6.5pt;font-weight:600;white-space:nowrap">شهریور ۱۴۰۳ – تاکنون</span>
+            <span style="color:#0f766e;font-size:6pt;font-weight:600;white-space:nowrap">شهریور ۱۴۰۳ – تاکنون</span>
           </div>
-          <div style="color:#0f766e;font-size:7.5pt;font-weight:600;margin:0.3mm 0 0.5mm">گروه صنعتی لینا ایران</div>
-          <ul style="margin:0;padding-right:3mm;font-size:7.5pt;color:#444;list-style-type:'▪ '">
-            <li style="margin-bottom:0.2mm">طراحی داشبوردهای مدیریتی Power BI · طراحی مدل داده و Data Mart · توسعه ETL</li>
-            <li style="margin-bottom:0.2mm">تعریف و پایش KPI فروش، تولید و مدیریت · تحلیل داده و گزارش برای مدیران ارشد</li>
+          <div style="color:#0f766e;font-size:7pt;font-weight:600;margin:0.2mm 0 0.4mm">گروه صنعتی لینا ایران</div>
+          <ul style="margin:0;padding-right:2.5mm;font-size:7pt;color:#444;list-style-type:'▪ '">
+            <li style="margin-bottom:0.1mm">طراحی داشبوردهای مدیریتی Power BI · طراحی مدل داده و Data Mart · توسعه ETL</li>
+            <li style="margin-bottom:0.1mm">تعریف و پایش KPI فروش، تولید و مدیریت · تحلیل داده و گزارش برای مدیران ارشد</li>
             <li>بهینه‌سازی گزارش‌گیری و افزایش کیفیت داده‌ها · همکاری با ذی‌نفعان</li>
           </ul>
         </div>
 
-        <div style="padding-right:3.5mm">
+        <div style="padding-right:3mm">
           <div style="display:flex;justify-content:space-between;align-items:baseline">
             <div>
-              <b style="font-size:8pt;color:#1a1a2e">تحلیلگر داده</b>
-              <span style="color:#555;font-size:7pt"> | Data Analyst</span>
+              <b style="font-size:7.5pt;color:#1a1a2e">تحلیلگر داده</b>
+              <span style="color:#555;font-size:6.5pt"> | Data Analyst</span>
             </div>
-            <span style="color:#0f766e;font-size:6.5pt;font-weight:600;white-space:nowrap">مهر ۱۳۹۹ – تاکنون</span>
+            <span style="color:#0f766e;font-size:6pt;font-weight:600;white-space:nowrap">مهر ۱۳۹۹ – تاکنون</span>
           </div>
-          <div style="color:#0f766e;font-size:7.5pt;font-weight:600;margin:0.3mm 0 0.5mm">مجتمع صنعتی سپاهان باتری</div>
-          <ul style="margin:0;padding-right:3mm;font-size:7.5pt;color:#444;list-style-type:'▪ '">
-            <li style="margin-bottom:0.2mm">طراحی ETL و انبار داده · داشبوردهای فروش، تولید، مالی و انبار · بهینه‌سازی SQL</li>
-            <li style="margin-bottom:0.2mm">تحلیل داده‌های فروش، تولید، کیفیت و زنجیره تأمین · مشارکت در زیرساخت BI</li>
+          <div style="color:#0f766e;font-size:7pt;font-weight:600;margin:0.2mm 0 0.4mm">مجتمع صنعتی سپاهان باتری</div>
+          <ul style="margin:0;padding-right:2.5mm;font-size:7pt;color:#444;list-style-type:'▪ '">
+            <li style="margin-bottom:0.1mm">طراحی ETL و انبار داده · داشبوردهای فروش، تولید، مالی و انبار · بهینه‌سازی SQL</li>
+            <li style="margin-bottom:0.1mm">تحلیل داده‌های فروش، تولید، کیفیت و زنجیره تأمین · مشارکت در زیرساخت BI</li>
             <li><b style="color:#0f766e">دستاوردها:</b> طراحی DW، خودکارسازی گزارش‌ها، مشارکت در BI کیمیا پلی</li>
           </ul>
         </div>
       </div>
 
-      <!-- BOTTOM ROW: Project + Education + Languages/Courses -->
-      <div style="display:flex;gap:2.5mm;border-top:1px solid #e0e7e9;padding-top:2mm;margin-top:1mm">
+      <!-- BOTTOM ROW -->
+      <div style="display:flex;gap:2mm;border-top:1px solid #dce3e5;padding-top:1.8mm;margin-top:1mm">
         <div style="flex:1.1">
-          <div style="font-size:6.5pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1mm;margin-bottom:0.8mm">
-            <span style="display:inline-block;width:10px;height:2px;background:#0f766e"></span> پروژه
+          <div style="font-size:6pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1mm;margin-bottom:0.6mm">
+            <span style="display:inline-block;width:8px;height:1.5px;background:#0f766e"></span> پروژه
           </div>
-          <div style="font-size:7.5pt;color:#2a2a3e;padding-right:3mm">
+          <div style="font-size:7pt;color:#2a2a3e;padding-right:2.5mm">
             <b>سیستم هوش تجاری کیمیا پلی</b><br/>
-            <span style="color:#555;font-size:7pt">تحلیل نیازها · مدل داده · ETL · داشبورد · KPI</span>
-            <span style="color:#0f766e;font-size:6.5pt"> (Power BI, SQL Server, SSIS)</span>
+            <span style="color:#555;font-size:6.5pt">تحلیل نیازها · مدل داده · ETL · داشبورد · KPI</span>
+            <span style="color:#0f766e;font-size:6pt"> (Power BI, SQL Server, SSIS)</span>
           </div>
         </div>
         <div style="flex:0.9">
-          <div style="font-size:6.5pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1mm;margin-bottom:0.8mm">
-            <span style="display:inline-block;width:10px;height:2px;background:#0f766e"></span> تحصیلات
+          <div style="font-size:6pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1mm;margin-bottom:0.6mm">
+            <span style="display:inline-block;width:8px;height:1.5px;background:#0f766e"></span> تحصیلات
           </div>
-          <div style="font-size:7.5pt;color:#2a2a3e;padding-right:3mm">
+          <div style="font-size:7pt;color:#2a2a3e;padding-right:2.5mm">
             <b>کارشناسی آمار</b><br/>
-            <span style="color:#555;font-size:7pt">دانشگاه صنعتی شاهرود</span>
-            <span style="color:#0f766e;font-size:6.5pt;font-weight:600"> · معدل: ۱۷.۶۵</span>
+            <span style="color:#555;font-size:6.5pt">دانشگاه صنعتی شاهرود</span>
+            <span style="color:#0f766e;font-size:6pt;font-weight:600"> · معدل: ۱۷.۶۵</span>
           </div>
         </div>
         <div style="flex:1">
-          <div style="font-size:6.5pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1mm;margin-bottom:0.8mm">
-            <span style="display:inline-block;width:10px;height:2px;background:#0f766e"></span> زبان &amp; مهارت‌های نرم
+          <div style="font-size:6pt;color:#0f766e;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:1mm;margin-bottom:0.6mm">
+            <span style="display:inline-block;width:8px;height:1.5px;background:#0f766e"></span> زبان &amp; مهارت‌های نرم
           </div>
-          <div style="font-size:7.5pt;color:#2a2a3e;padding-right:3mm">
-            فارسی <span style="color:#555;font-size:7pt">(زبان مادری)</span> · انگلیسی <span style="color:#555;font-size:7pt">(متوسط)</span>
+          <div style="font-size:7pt;color:#2a2a3e;padding-right:2.5mm">
+            فارسی <span style="color:#555;font-size:6.5pt">(زبان مادری)</span> · انگلیسی <span style="color:#555;font-size:6.5pt">(متوسط)</span>
           </div>
-          <div style="font-size:7pt;color:#555;padding-right:3mm;margin-top:0.3mm">
+          <div style="font-size:6.5pt;color:#555;padding-right:2.5mm;margin-top:0.2mm">
             تحلیل داده · تفکر تحلیلی · BI · کار تیمی · یادگیری سریع · مسئولیت‌پذیری · مدیریت زمان
           </div>
-          <div style="font-size:6.5pt;color:#666;padding-right:3mm;margin-top:0.5mm;border-top:1px dotted #ddd;padding-top:0.4mm">
+          <div style="font-size:6pt;color:#666;padding-right:2.5mm;margin-top:0.4mm;border-top:1px dotted #dce3e5;padding-top:0.3mm">
             <b>دوره‌ها:</b> Power BI Adv. · Python · SQL Adv. · DW · ETL/SSIS · ML · Big Data · Spark · Kafka
           </div>
         </div>
@@ -765,25 +778,30 @@
     // Particles
     (function(){
       var c=document.getElementById('particles');if(!c)return;
-      for(var i=0;i<25;i++){var p=document.createElement('div');p.className='particle';
+      for(var i=0;i<30;i++){var p=document.createElement('div');p.className='particle';
         p.style.left=Math.random()*100+'%';p.style.bottom='-5%';
-        p.style.animationDuration=(12+Math.random()*18)+'s';
-        p.style.animationDelay=(Math.random()*14)+'s';
+        p.style.animationDuration=(14+Math.random()*20)+'s';
+        p.style.animationDelay=(Math.random()*16)+'s';
         p.style.width=(2+Math.random()*3)+'px';p.style.height=p.style.width;
         c.appendChild(p);}
     })();
 
-    // Scroll top
+    // Scroll top + floating download button
     (function(){
       var btn=document.getElementById('scrollTop');
-      window.addEventListener('scroll',function(){btn.classList.toggle('visible',window.scrollY>500);},{passive:true});
+      var dl=document.getElementById('floatDl');
+      window.addEventListener('scroll',function(){
+        var v=window.scrollY>500;
+        btn.classList.toggle('visible',v);
+        dl.classList.toggle('visible',v);
+      },{passive:true});
     })();
 
     // Scroll reveal
     (function(){
       var obs=new IntersectionObserver(function(entries){
         entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
-      },{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+      },{threshold:0.06,rootMargin:'0px 0px -30px 0px'});
       document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
     })();
 
@@ -793,7 +811,7 @@
         entries.forEach(function(e){
           if(e.isIntersecting){var f=e.target;var p=f.getAttribute('data-pct');if(p)f.style.width=p+'%';f.classList.add('animated');obs.unobserve(f);}
         });
-      },{threshold:0.3});
+      },{threshold:0.25});
       document.querySelectorAll('.skill-fill').forEach(function(el){obs.observe(el);});
     })();
 
@@ -824,9 +842,9 @@
 
     // PDF download
     function downloadPDF(){
-      var btn=document.querySelector('.download-btn');
+      var btn=document.getElementById('floatDl');
       btn.disabled=true;
-      btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> در حال آماده‌سازی...';
+      btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> آماده‌سازی...';
 
       var pdfEl=document.getElementById('pdf-version');
       pdfEl.style.display='block';
@@ -842,11 +860,11 @@
       html2pdf().set(opt).from(pdfEl).save().then(function(){
         pdfEl.style.display='none';
         btn.disabled=false;
-        btn.innerHTML='<i class="fas fa-download"></i> دانلود رزومه (PDF)';
+        btn.innerHTML='<i class="fas fa-download"></i> دانلود PDF';
       }).catch(function(){
         pdfEl.style.display='none';
         btn.disabled=false;
-        btn.innerHTML='<i class="fas fa-download"></i> دانلود رزومه (PDF)';
+        btn.innerHTML='<i class="fas fa-download"></i> دانلود PDF';
         alert('مشکلی پیش آمد. از Ctrl+P استفاده کنید.');
       });
     }
