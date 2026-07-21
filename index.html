@@ -190,19 +190,17 @@
     }
     .hero-right h1 span{
       display:inline-block;overflow:hidden;white-space:nowrap;
-      width:0;animation:typeName 0.9s steps(11) 0.3s forwards,cursorHide 0.01s 1.4s forwards;
-      border-left:2px solid rgba(0,212,170,0.4);padding-left:5px
+      border-left:2px solid rgba(0,212,170,0.4);padding-left:5px;
+      visibility:hidden
     }
-    @keyframes typeName{to{width:100%}}
-    @keyframes cursorHide{to{border-color:transparent}}
+    .hero-right h1 span.typing{border-left-color:transparent}
     @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
     .hero-right .role{
       font-size:1.3rem;color:rgba(255,255,255,0.6);font-weight:600;
       margin-bottom:0.05rem;overflow:hidden;white-space:nowrap;
-      width:0;animation:typeIn 1.2s 1.5s steps(20) forwards,cursorHide 0.01s 3s forwards;
-      border-left:2px solid rgba(0,212,170,0.4)
+      border-left:2px solid rgba(0,212,170,0.4);visibility:hidden
     }
-    @keyframes typeIn{to{width:100%}}
+    .hero-right .role.typing{border-left-color:transparent}
     .hero-right .role-en{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);letter-spacing:0.2em;margin-bottom:1.2rem;opacity:0;transform:translateY(8px);animation:fadeInUp 0.6s 0.9s ease both}
 
     .contact-pills{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.7rem}
@@ -554,8 +552,8 @@
         </div>
         <div class="hero-right">
           <div class="available-badge"><span class="dot"></span> Available for opportunities</div>
-          <h1><span data-text="محمد محمودی">محمد محمودی</span></h1>
-          <p class="role">مهندس ارشد داده و هوش تجاری</p>
+          <h1><span id="typeName" data-text="محمد محمودی"></span></h1>
+          <p class="role" id="typeRole" data-text="مهندس ارشد داده و هوش تجاری"></p>
           <p class="role-en">SENIOR DATA ANALYST &middot; BI ENGINEER</p>
           <div class="contact-pills">
             <a href="tel:09919364887"><i class="fas fa-phone"></i> ۰۹۹۱۹۳۶۴۸۸۷</a>
@@ -954,7 +952,28 @@
       document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
     })();
 
-
+    (function(){
+      var nn=document.getElementById("typeName");
+      var rr=document.getElementById("typeRole");
+      var nt=nn.getAttribute("data-text");
+      var rt=rr.getAttribute("data-text");
+      function tc(el,t,i,cb){
+        el.textContent=t.substring(0,i+1);
+        if(i>=t.length-1){el.classList.add("typing");setTimeout(cb,500);return}
+        setTimeout(function(){tc(el,t,i+1,cb);},30+Math.random()*50);
+      }
+      setTimeout(function(){
+        nn.style.visibility="visible";
+        tc(nn,nt,0,function(){
+          setTimeout(function(){
+            rr.style.visibility="visible";
+            tc(rr,rt,0,function(){
+              nn.style.borderColor="transparent";rr.style.borderColor="transparent";
+            });
+          },400);
+        });
+      },400);
+    })();
 
     (function(){
       function anim(el,target,duration){
