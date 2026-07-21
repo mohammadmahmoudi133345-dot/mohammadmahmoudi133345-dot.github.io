@@ -36,6 +36,11 @@
         radial-gradient(ellipse 40% 30% at 85% 100%,rgba(162,155,254,0.025),transparent 50%),
         radial-gradient(ellipse 30% 20% at 20% 70%,rgba(253,121,168,0.015),transparent 50%);
     }
+    body::before{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+      opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat:repeat;background-size:256px 256px
+    }
     ::-webkit-scrollbar{width:4px}
     ::-webkit-scrollbar-track{background:transparent}
     ::-webkit-scrollbar-thumb{background:var(--primary-dark);border-radius:10px}
@@ -95,6 +100,16 @@
       85%{opacity:1}
       100%{transform:translateY(-120vh) rotate(360deg);opacity:0}
     }
+
+    .geo{position:absolute;border-radius:50%;pointer-events:none;opacity:0.15}
+    .geo:nth-child(4){width:60px;height:60px;border:1.5px solid rgba(0,212,170,0.25);top:18%;right:8%;animation:geoDrift1 25s linear infinite}
+    .geo:nth-child(5){width:35px;height:35px;border:1.5px solid rgba(162,155,254,0.2);bottom:22%;right:15%;animation:geoDrift2 20s linear infinite}
+    .geo:nth-child(6){width:45px;height:45px;border:1.5px solid rgba(253,121,168,0.15);top:55%;left:6%;border-radius:8px;animation:geoDrift3 22s linear infinite}
+    .geo:nth-child(7){width:25px;height:25px;background:rgba(0,212,170,0.04);border:1px solid rgba(0,212,170,0.08);top:35%;left:12%;border-radius:6px;transform:rotate(45deg);animation:geoDrift1 30s linear infinite}
+    .geo:nth-child(8){width:40px;height:40px;border:1px solid rgba(162,155,254,0.12);bottom:40%;right:4%;border-radius:50% 50% 50% 0;animation:geoDrift2 28s linear infinite}
+    @keyframes geoDrift1{0%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(15px,-20px) rotate(90deg)}50%{transform:translate(-10px,10px) rotate(180deg)}75%{transform:translate(20px,15px) rotate(270deg)}100%{transform:translate(0,0) rotate(360deg)}}
+    @keyframes geoDrift2{0%{transform:translate(0,0)}33%{transform:translate(-18px,-12px)}66%{transform:translate(12px,18px)}100%{transform:translate(0,0)}}
+    @keyframes geoDrift3{0%{transform:translate(0,0) scale(1)}50%{transform:translate(15px,-18px) scale(1.15)}100%{transform:translate(0,0) scale(1)}}
 
     .hero-inner{position:relative;z-index:2;width:100%;max-width:1120px;margin:0 auto;padding:0 1.5rem}
     .hero-watermark{
@@ -174,8 +189,14 @@
       background-size:200% 200%;animation:gradientShift 6s ease-in-out infinite
     }
     @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    .hero-right .role{font-size:1.3rem;color:rgba(255,255,255,0.6);font-weight:600;margin-bottom:0.05rem}
-    .hero-right .role-en{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);letter-spacing:0.2em;margin-bottom:1.2rem}
+    .hero-right .role{
+      font-size:1.3rem;color:rgba(255,255,255,0.6);font-weight:600;
+      margin-bottom:0.05rem;overflow:hidden;white-space:nowrap;
+      width:0;animation:typeIn 1.2s 0.5s steps(20) forwards;
+      border-left:2px solid rgba(0,212,170,0.4)
+    }
+    @keyframes typeIn{to{width:100%}}
+    .hero-right .role-en{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);letter-spacing:0.2em;margin-bottom:1.2rem;opacity:0;transform:translateY(8px);animation:fadeInUp 0.6s 0.9s ease both}
 
     .contact-pills{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.7rem}
     .contact-pills a,.contact-pills span{
@@ -518,6 +539,7 @@
     <div class="hero-grid no-print"></div>
     <div class="mesh-glow no-print"></div>
     <div class="orb no-print"></div><div class="orb no-print"></div><div class="orb no-print"></div>
+    <div class="geo no-print"></div><div class="geo no-print"></div><div class="geo no-print"></div><div class="geo no-print"></div><div class="geo no-print"></div>
     <div class="no-print" id="particles"></div>
 
     <div class="hero-inner">
