@@ -278,12 +278,19 @@
     .card:hover{border-color:var(--border-hover);transform:translateY(-4px);box-shadow:var(--shadow),0 0 50px rgba(0,212,170,0.02)}
 
     /* ===== ABOUT ===== */
-    .about-text{font-size:1rem;line-height:2.2;color:rgba(255,255,255,0.68);text-align:justify}
-    .about-text strong{color:var(--primary);font-weight:700;position:relative}
-    .about-text strong::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(0,212,170,0.12);border-radius:2px}
+    .about-wrap{display:flex;gap:2rem;flex-direction:column}
+    .about-wrap .about-main{display:flex;gap:2rem;align-items:flex-start}
+    .about-wrap .about-quote{flex-shrink:0;width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--primary),rgba(0,212,170,0.08));display:flex;align-items:center;justify-content:center;font-size:2rem;color:rgba(255,255,255,0.15);border:1px solid rgba(0,212,170,0.06)}
+    .about-wrap .about-body{flex:1}
+    .about-wrap .about-body p{color:rgba(255,255,255,0.52);line-height:1.9;font-size:0.78rem;margin:0}
+    .about-wrap .about-body p strong{color:var(--primary-light);font-weight:600}
+    .about-wrap .about-body p strong::after{content:'';display:none}
+    .about-highlights{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.03)}
+    .about-highlights span{display:inline-flex;align-items:center;gap:0.3rem;padding:0.25rem 0.7rem;border-radius:30px;font-size:0.65rem;color:var(--text-muted);background:rgba(255,255,255,0.015);border:1px solid var(--border);font-family:'JetBrains Mono',monospace}
+    .about-highlights span i{color:var(--primary);font-size:0.55rem;width:12px;text-align:center}
 
     /* ===== SKILLS ===== */
-    .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:1.2rem}
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.2rem}
     .skill-card{
       padding:1.5rem 1.6rem;overflow:hidden;
       --accent-color:var(--primary)
@@ -303,45 +310,49 @@
     }
     .skill-card h3 i{color:var(--accent-color);font-size:0.8rem;width:20px;text-align:center}
 
-    .skill-list{display:flex;flex-wrap:wrap;gap:0.45rem;position:relative;z-index:1}
-    .skill-chip{
-      display:inline-flex;align-items:center;gap:0.35rem;
-      padding:0.22rem 0.7rem 0.22rem 0.55rem;
-      border-radius:30px;font-size:0.65rem;
-      font-family:'JetBrains Mono',monospace;
-      color:rgba(255,255,255,0.5);
-      background:rgba(255,255,255,0.015);
-      border:1px solid var(--border);
-      transition:var(--transition);
-      cursor:default;
-      opacity:0;transform:translateY(8px);animation:chipPop 0.4s ease forwards
+    .skill-items{display:flex;flex-direction:column;gap:0.7rem;position:relative;z-index:1}
+    .skill-row{
+      display:flex;align-items:center;gap:0.6rem;
+      opacity:0;transform:translateX(-10px);
+      animation:skillSlide 0.5s ease forwards
     }
-    @keyframes chipPop{to{opacity:1;transform:translateY(0)}}
-    .skill-chip:nth-child(1){animation-delay:0.05s}.skill-card:nth-child(1) .skill-chip:nth-child(2){animation-delay:0.09s}.skill-card:nth-child(1) .skill-chip:nth-child(3){animation-delay:0.13s}.skill-card:nth-child(1) .skill-chip:nth-child(4){animation-delay:0.17s}
-    .skill-card:nth-child(2) .skill-chip:nth-child(1){animation-delay:0.04s}.skill-card:nth-child(2) .skill-chip:nth-child(2){animation-delay:0.08s}.skill-card:nth-child(2) .skill-chip:nth-child(3){animation-delay:0.12s}.skill-card:nth-child(2) .skill-chip:nth-child(4){animation-delay:0.16s}.skill-card:nth-child(2) .skill-chip:nth-child(5){animation-delay:0.2s}.skill-card:nth-child(2) .skill-chip:nth-child(6){animation-delay:0.24s}.skill-card:nth-child(2) .skill-chip:nth-child(7){animation-delay:0.28s}
-    .skill-card:nth-child(3) .skill-chip:nth-child(1){animation-delay:0.05s}.skill-card:nth-child(3) .skill-chip:nth-child(2){animation-delay:0.09s}.skill-card:nth-child(3) .skill-chip:nth-child(3){animation-delay:0.13s}.skill-card:nth-child(3) .skill-chip:nth-child(4){animation-delay:0.17s}
-    .skill-card:nth-child(4) .skill-chip:nth-child(1){animation-delay:0.04s}.skill-card:nth-child(4) .skill-chip:nth-child(2){animation-delay:0.08s}.skill-card:nth-child(4) .skill-chip:nth-child(3){animation-delay:0.12s}.skill-card:nth-child(4) .skill-chip:nth-child(4){animation-delay:0.16s}
-    .skill-card:nth-child(5) .skill-chip:nth-child(1){animation-delay:0.06s}.skill-card:nth-child(5) .skill-chip:nth-child(2){animation-delay:0.1s}.skill-card:nth-child(5) .skill-chip:nth-child(3){animation-delay:0.14s}.skill-card:nth-child(5) .skill-chip:nth-child(4){animation-delay:0.18s}
-    .skill-chip .chip-pct{
-      display:inline-flex;align-items:center;justify-content:center;
-      font-size:0.55rem;font-weight:700;
-      color:var(--accent-color);
-      background:rgba(255,255,255,0.03);
-      border-radius:20px;padding:0.04rem 0.35rem;
-      margin-right:0.05rem;transition:var(--transition)
+    @keyframes skillSlide{to{opacity:1;transform:translateX(0)}}
+    .skill-card:nth-child(1) .skill-row:nth-child(1){animation-delay:0.04s}.skill-card:nth-child(1) .skill-row:nth-child(2){animation-delay:0.08s}.skill-card:nth-child(1) .skill-row:nth-child(3){animation-delay:0.12s}.skill-card:nth-child(1) .skill-row:nth-child(4){animation-delay:0.16s}
+    .skill-card:nth-child(2) .skill-row:nth-child(1){animation-delay:0.03s}.skill-card:nth-child(2) .skill-row:nth-child(2){animation-delay:0.06s}.skill-card:nth-child(2) .skill-row:nth-child(3){animation-delay:0.09s}.skill-card:nth-child(2) .skill-row:nth-child(4){animation-delay:0.12s}.skill-card:nth-child(2) .skill-row:nth-child(5){animation-delay:0.15s}.skill-card:nth-child(2) .skill-row:nth-child(6){animation-delay:0.18s}.skill-card:nth-child(2) .skill-row:nth-child(7){animation-delay:0.21s}
+    .skill-card:nth-child(3) .skill-row:nth-child(1){animation-delay:0.05s}.skill-card:nth-child(3) .skill-row:nth-child(2){animation-delay:0.09s}.skill-card:nth-child(3) .skill-row:nth-child(3){animation-delay:0.13s}.skill-card:nth-child(3) .skill-row:nth-child(4){animation-delay:0.17s}
+    .skill-card:nth-child(4) .skill-row:nth-child(1){animation-delay:0.04s}.skill-card:nth-child(4) .skill-row:nth-child(2){animation-delay:0.08s}.skill-card:nth-child(4) .skill-row:nth-child(3){animation-delay:0.12s}.skill-card:nth-child(4) .skill-row:nth-child(4){animation-delay:0.16s}
+    .skill-card:nth-child(5) .skill-row:nth-child(1){animation-delay:0.06s}.skill-card:nth-child(5) .skill-row:nth-child(2){animation-delay:0.1s}.skill-card:nth-child(5) .skill-row:nth-child(3){animation-delay:0.14s}.skill-card:nth-child(5) .skill-row:nth-child(4){animation-delay:0.18s}
+    .skill-row .s-name{
+      min-width:5.2rem;font-size:0.68rem;font-family:'JetBrains Mono',monospace;
+      color:rgba(255,255,255,0.45);display:flex;align-items:center;gap:0.3rem;
+      transition:var(--transition);position:relative
     }
-    .skill-chip .chip-dot{width:5px;height:5px;border-radius:50%;background:var(--accent-color);opacity:0.2}
-    .skill-chip[data-lvl="5"]{border-color:rgba(255,255,255,0.08);background:rgba(255,255,255,0.02)}
-    .skill-chip[data-lvl="5"] .chip-dot{opacity:0.5;box-shadow:0 0 6px var(--accent-color)}
-    .skill-chip[data-lvl="4"] .chip-dot{opacity:0.35}
-    .skill-chip[data-lvl="3"] .chip-dot{opacity:0.2}
-    .skill-chip:hover{
-      background:rgba(255,255,255,0.035);
-      border-color:rgba(255,255,255,0.1);
-      transform:translateY(-2px);
-      color:var(--accent-color)
+    .skill-row .s-name::before{content:'▹';font-size:0.5rem;color:var(--accent-color);opacity:0.3;transition:var(--transition)}
+    .skill-row:hover .s-name::before{opacity:1;transform:translateX(-2px)}
+    .skill-row:hover .s-name{color:var(--accent-color)}
+    .skill-row .s-track{flex:1;height:6px;border-radius:10px;background:rgba(255,255,255,0.02);overflow:hidden;position:relative}
+    .skill-row .s-fill{
+      height:100%;border-radius:10px;width:0;
+      background:linear-gradient(90deg,var(--accent-color),rgba(255,255,255,0.25));
+      transition:width 1.4s cubic-bezier(0.16,1,0.3,1);
+      position:relative;overflow:hidden;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.06)
     }
-    .skill-chip:hover .chip-pct{background:rgba(255,255,255,0.06)}
+    .skill-row .s-fill::after{content:'';position:absolute;right:0;top:-1px;bottom:-1px;width:8px;border-radius:4px;background:#fff;filter:blur(5px);opacity:0.5;animation:tipPulse 2s ease-in-out infinite}
+    @keyframes tipPulse{0%,100%{opacity:0.4}50%{opacity:0.8}}
+    .skill-row .s-fill::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);
+      transform:translateX(-100%);animation:shimmer 3s ease-in-out infinite
+    }
+    @keyframes shimmer{100%{transform:translateX(100%)}}
+    .skill-row .s-pct{
+      min-width:2.8rem;text-align:right;
+      font-size:0.68rem;font-weight:700;font-family:'JetBrains Mono',monospace;
+      color:var(--accent-color);transition:var(--transition)
+    }
+    .skill-row .s-pct span{font-weight:400;opacity:0.3;font-size:0.6rem}
+    .skill-row:hover .s-pct{transform:scale(1.08)}
 
     /* ===== TIMELINE ===== */
     .timeline{position:relative;padding-right:2.5rem}
@@ -501,10 +512,12 @@
       .card,.skill-card,.timeline-card,.project-card,.edu-card,.lang-card,.trait-card{background:#fff!important;border:1px solid #ddd!important;box-shadow:none!important;transform:none!important;backdrop-filter:none!important}
       .card::before,.card::after,.skill-card::before,.skill-card::after{display:none!important}
       .hero-right h1,.stat-value,.section-title-group h2{background:none!important;-webkit-text-fill-color:#0f766e!important;color:#0f766e!important}
-      .skill-chip{border-color:#ddd!important;color:#444!important;background:#f5f5f5!important;padding:0.15rem 0.5rem!important;font-size:0.7rem!important}
-      .skill-chip .chip-pct{color:#0f766e!important;background:transparent!important;padding:0!important}
-      .skill-chip .chip-dot{display:none!important}
-      .skill-list{gap:0.3rem!important}
+      .skill-row{display:flex!important;align-items:center!important;gap:0.4rem!important;opacity:1!important;transform:none!important;animation:none!important;margin-bottom:0.25rem!important}
+      .skill-row .s-name{color:#444!important;font-size:0.7rem!important;min-width:4.5rem!important}
+      .skill-row .s-name::before{color:#0f766e!important;opacity:0.5!important}
+      .skill-row .s-track{display:none!important}
+      .skill-row .s-pct{color:#0f766e!important;font-size:0.7rem!important;min-width:auto!important}
+      .skill-row .s-pct span{color:#888!important}
       .about-text,.exp-list li,.project-grid li,.achievements ul li{color:#444!important}
       .about-text strong::after{display:none}
       .tech-stack span,.course-badge{border-color:#ddd!important;color:#555!important;background:#f5f5f5!important}
@@ -584,7 +597,21 @@
         <div class="section-line"></div>
       </div>
       <div class="card" style="padding:2rem">
-        <p class="about-text">مهندس داده و تحلیلگر ارشد داده با بیش از <strong>۶ سال تجربه</strong> در حوزه تحلیل داده، طراحی انبار داده (Data Warehouse)، توسعه فرآیندهای ETL و پیاده‌سازی راهکارهای هوش تجاری (BI). متخصص در طراحی داشبوردهای مدیریتی و عملیاتی با <strong>Power BI</strong>، توسعه مدل‌های داده، تحلیل داده‌های کسب‌وکار و ارائه گزارش‌های تحلیلی جهت پشتیبانی از تصمیم‌گیری مدیران. مسلط به <strong>SQL، Python</strong> و فناوری‌های داده‌های حجیم و علاقه‌مند به طراحی سیستم‌های داده‌محور و بهینه‌سازی فرآیندهای سازمانی.</p>
+        <div class="about-wrap">
+          <div class="about-main">
+            <div class="about-quote"><i class="fas fa-quote-right"></i></div>
+            <div class="about-body">
+              <p>مهندس داده و تحلیلگر ارشد داده با بیش از <strong>۶ سال تجربه</strong> در حوزه تحلیل داده، طراحی انبار داده (Data Warehouse)، توسعه فرآیندهای ETL و پیاده‌سازی راهکارهای هوش تجاری (BI). متخصص در طراحی داشبوردهای مدیریتی و عملیاتی با <strong>Power BI</strong>، توسعه مدل‌های داده، تحلیل داده‌های کسب‌وکار و ارائه گزارش‌های تحلیلی جهت پشتیبانی از تصمیم‌گیری مدیران. مسلط به <strong>SQL، Python</strong> و فناوری‌های داده‌های حجیم و علاقه‌مند به طراحی سیستم‌های داده‌محور و بهینه‌سازی فرآیندهای سازمانی.</p>
+              <div class="about-highlights">
+                <span><i class="fas fa-database"></i> Data Engineering</span>
+                <span><i class="fas fa-chart-line"></i> BI &amp; Analytics</span>
+                <span><i class="fas fa-warehouse"></i> Data Warehouse</span>
+                <span><i class="fas fa-bolt"></i> ETL &amp; Pipeline</span>
+                <span><i class="fas fa-chart-pie"></i> Dashboard Design</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -597,50 +624,50 @@
       <div class="skills-grid">
         <div class="card skill-card reveal">
           <h3><i class="fas fa-code"></i> زبان‌های برنامه‌نویسی</h3>
-          <div class="skill-list">
-            <span class="skill-chip" data-lvl="5"><span class="chip-pct">۸۵</span><span class="chip-dot"></span>Python</span>
-            <span class="skill-chip" data-lvl="5"><span class="chip-pct">۸۵</span><span class="chip-dot"></span>SQL</span>
-            <span class="skill-chip" data-lvl="4"><span class="chip-pct">۷۵</span><span class="chip-dot"></span>Git</span>
-            <span class="skill-chip" data-lvl="4"><span class="chip-pct">۷۰</span><span class="chip-dot"></span>REST API</span>
+          <div class="skill-items">
+            <div class="skill-row"><span class="s-name">Python</span><div class="s-track"><div class="s-fill" data-pct="85"></div></div><span class="s-pct">85<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">SQL</span><div class="s-track"><div class="s-fill" data-pct="85"></div></div><span class="s-pct">85<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">Git</span><div class="s-track"><div class="s-fill" data-pct="75"></div></div><span class="s-pct">75<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">REST API</span><div class="s-track"><div class="s-fill" data-pct="70"></div></div><span class="s-pct">70<span>%</span></span></div>
           </div>
         </div>
         <div class="card skill-card reveal">
           <h3><i class="fas fa-chart-bar"></i> هوش تجاری (BI)</h3>
-          <div class="skill-list">
-            <span class="skill-chip" data-lvl="5"><span class="chip-pct">۸۸</span><span class="chip-dot"></span>Power BI</span>
-            <span class="skill-chip" data-lvl="5"><span class="chip-pct">۸۵</span><span class="chip-dot"></span>SSIS</span>
-            <span class="skill-chip" data-lvl="5"><span class="chip-pct">۸۵</span><span class="chip-dot"></span>ETL</span>
-            <span class="skill-chip" data-lvl="5"><span class="chip-pct">۸۲</span><span class="chip-dot"></span>Data Warehouse</span>
-            <span class="skill-chip" data-lvl="4"><span class="chip-pct">۷۸</span><span class="chip-dot"></span>Data Modeling</span>
-            <span class="skill-chip" data-lvl="5"><span class="chip-pct">۸۵</span><span class="chip-dot"></span>Dashboard Design</span>
-            <span class="skill-chip" data-lvl="4"><span class="chip-pct">۸۰</span><span class="chip-dot"></span>KPI Design</span>
+          <div class="skill-items">
+            <div class="skill-row"><span class="s-name">Power BI</span><div class="s-track"><div class="s-fill" data-pct="88"></div></div><span class="s-pct">88<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">SSIS</span><div class="s-track"><div class="s-fill" data-pct="85"></div></div><span class="s-pct">85<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">ETL</span><div class="s-track"><div class="s-fill" data-pct="85"></div></div><span class="s-pct">85<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">Data Warehouse</span><div class="s-track"><div class="s-fill" data-pct="82"></div></div><span class="s-pct">82<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">Data Modeling</span><div class="s-track"><div class="s-fill" data-pct="78"></div></div><span class="s-pct">78<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">Dashboard Design</span><div class="s-track"><div class="s-fill" data-pct="85"></div></div><span class="s-pct">85<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">KPI Design</span><div class="s-track"><div class="s-fill" data-pct="80"></div></div><span class="s-pct">80<span>%</span></span></div>
           </div>
         </div>
         <div class="card skill-card reveal">
           <h3><i class="fas fa-database"></i> پایگاه داده</h3>
-          <div class="skill-list">
-            <span class="skill-chip" data-lvl="5"><span class="chip-pct">۸۵</span><span class="chip-dot"></span>SQL Server</span>
-            <span class="skill-chip" data-lvl="4"><span class="chip-pct">۷۸</span><span class="chip-dot"></span>PostgreSQL</span>
-            <span class="skill-chip" data-lvl="3"><span class="chip-pct">۶۲</span><span class="chip-dot"></span>MongoDB</span>
-            <span class="skill-chip" data-lvl="3"><span class="chip-pct">۵۸</span><span class="chip-dot"></span>Redis</span>
+          <div class="skill-items">
+            <div class="skill-row"><span class="s-name">SQL Server</span><div class="s-track"><div class="s-fill" data-pct="85"></div></div><span class="s-pct">85<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">PostgreSQL</span><div class="s-track"><div class="s-fill" data-pct="78"></div></div><span class="s-pct">78<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">MongoDB</span><div class="s-track"><div class="s-fill" data-pct="62"></div></div><span class="s-pct">62<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">Redis</span><div class="s-track"><div class="s-fill" data-pct="58"></div></div><span class="s-pct">58<span>%</span></span></div>
           </div>
         </div>
         <div class="card skill-card reveal">
           <h3><i class="fas fa-cloud"></i> کلان‌داده (Big Data)</h3>
-          <div class="skill-list">
-            <span class="skill-chip" data-lvl="4"><span class="chip-pct">۷۰</span><span class="chip-dot"></span>Apache Kafka</span>
-            <span class="skill-chip" data-lvl="4"><span class="chip-pct">۶۸</span><span class="chip-dot"></span>Apache Spark</span>
-            <span class="skill-chip" data-lvl="3"><span class="chip-pct">۶۰</span><span class="chip-dot"></span>Hadoop</span>
-            <span class="skill-chip" data-lvl="4"><span class="chip-pct">۷۵</span><span class="chip-dot"></span>Linux</span>
+          <div class="skill-items">
+            <div class="skill-row"><span class="s-name">Apache Kafka</span><div class="s-track"><div class="s-fill" data-pct="70"></div></div><span class="s-pct">70<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">Apache Spark</span><div class="s-track"><div class="s-fill" data-pct="68"></div></div><span class="s-pct">68<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">Hadoop</span><div class="s-track"><div class="s-fill" data-pct="60"></div></div><span class="s-pct">60<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">Linux</span><div class="s-track"><div class="s-fill" data-pct="75"></div></div><span class="s-pct">75<span>%</span></span></div>
           </div>
         </div>
         <div class="card skill-card reveal">
           <h3><i class="fas fa-brain"></i> علم داده و یادگیری ماشین</h3>
-          <div class="skill-list">
-            <span class="skill-chip" data-lvl="5"><span class="chip-pct">۸۲</span><span class="chip-dot"></span>Pandas</span>
-            <span class="skill-chip" data-lvl="4"><span class="chip-pct">۷۸</span><span class="chip-dot"></span>NumPy</span>
-            <span class="skill-chip" data-lvl="4"><span class="chip-pct">۷۰</span><span class="chip-dot"></span>Scikit-learn</span>
-            <span class="skill-chip" data-lvl="3"><span class="chip-pct">۶۰</span><span class="chip-dot"></span>Deep Learning</span>
+          <div class="skill-items">
+            <div class="skill-row"><span class="s-name">Pandas</span><div class="s-track"><div class="s-fill" data-pct="82"></div></div><span class="s-pct">82<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">NumPy</span><div class="s-track"><div class="s-fill" data-pct="78"></div></div><span class="s-pct">78<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">Scikit-learn</span><div class="s-track"><div class="s-fill" data-pct="70"></div></div><span class="s-pct">70<span>%</span></span></div>
+            <div class="skill-row"><span class="s-name">Deep Learning</span><div class="s-track"><div class="s-fill" data-pct="60"></div></div><span class="s-pct">60<span>%</span></span></div>
           </div>
         </div>
       </div>
@@ -973,6 +1000,19 @@
           },400);
         });
       },400);
+    })();
+
+    (function(){
+      var so=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            var p=e.target.getAttribute('data-pct');
+            if(p)e.target.style.width=p+'%';
+            so.unobserve(e.target);
+          }
+        });
+      },{threshold:0.2});
+      document.querySelectorAll('.s-fill').forEach(function(el){so.observe(el);});
     })();
 
     (function(){
