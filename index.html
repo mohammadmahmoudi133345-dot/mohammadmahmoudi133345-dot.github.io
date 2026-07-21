@@ -278,16 +278,28 @@
     .card:hover{border-color:var(--border-hover);transform:translateY(-4px);box-shadow:var(--shadow),0 0 50px rgba(0,212,170,0.02)}
 
     /* ===== ABOUT ===== */
-    .about-wrap{display:flex;gap:2rem;flex-direction:column}
-    .about-wrap .about-main{display:flex;gap:2rem;align-items:flex-start}
-    .about-wrap .about-quote{flex-shrink:0;width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--primary),rgba(0,212,170,0.08));display:flex;align-items:center;justify-content:center;font-size:2rem;color:rgba(255,255,255,0.15);border:1px solid rgba(0,212,170,0.06)}
-    .about-wrap .about-body{flex:1}
-    .about-wrap .about-body p{color:rgba(255,255,255,0.52);line-height:1.9;font-size:0.78rem;margin:0}
-    .about-wrap .about-body p strong{color:var(--primary-light);font-weight:600}
-    .about-wrap .about-body p strong::after{content:'';display:none}
-    .about-highlights{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.03)}
-    .about-highlights span{display:inline-flex;align-items:center;gap:0.3rem;padding:0.25rem 0.7rem;border-radius:30px;font-size:0.65rem;color:var(--text-muted);background:rgba(255,255,255,0.015);border:1px solid var(--border);font-family:'JetBrains Mono',monospace}
-    .about-highlights span i{color:var(--primary);font-size:0.55rem;width:12px;text-align:center}
+    .about-card{padding:0!important;overflow:hidden}
+    .about-card .accent-bar{height:3px;background:linear-gradient(90deg,var(--primary),var(--secondary),transparent)}
+    .about-stats{display:flex;padding:1rem 2rem;background:rgba(255,255,255,0.008);border-bottom:1px solid rgba(255,255,255,0.015)}
+    .about-stat{flex:1;display:flex;align-items:center;gap:0.6rem;justify-content:center}
+    .about-stat+.about-stat{border-right:1px solid rgba(255,255,255,0.03)}
+    .about-stat .as-icon{width:32px;height:32px;border-radius:10px;background:rgba(0,212,170,0.04);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--primary);flex-shrink:0}
+    .about-stat .as-num{font-size:1.1rem;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace;line-height:1}
+    .about-stat .as-label{font-size:0.62rem;color:var(--text-dim);line-height:1.2;margin-top:0.1rem}
+    .about-body-wrap{display:flex;gap:2rem;padding:2rem;align-items:flex-start}
+    .about-side{flex-shrink:0;width:120px;display:flex;flex-direction:column;align-items:center;gap:0.6rem}
+    .about-side .as-avatar{width:100px;height:100px;border-radius:20px;background:linear-gradient(135deg,rgba(0,212,170,0.04),rgba(162,155,254,0.04));border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:rgba(255,255,255,0.08);position:relative;overflow:hidden}
+    .about-side .as-avatar::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(0,212,170,0.04),transparent 60%)}
+    .about-side .as-tag{padding:0.2rem 0.65rem;border-radius:30px;font-size:0.58rem;color:var(--primary);border:1px solid rgba(0,212,170,0.06);background:rgba(0,212,170,0.02);font-family:'JetBrains Mono',monospace;white-space:nowrap}
+    .about-side .as-role{font-size:0.58rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace;text-align:center;line-height:1.5}
+    .about-content{flex:1;min-width:0}
+    .about-content .ac-quote{font-size:3rem;line-height:0.5;color:rgba(0,212,170,0.04);margin-bottom:0.5rem;font-family:serif}
+    .about-content p{color:rgba(255,255,255,0.48);line-height:2;font-size:0.78rem;margin:0}
+    .about-content p strong{color:var(--primary-light);font-weight:600;position:relative}
+    .about-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.015)}
+    .about-tags span{display:inline-flex;align-items:center;gap:0.25rem;padding:0.2rem 0.65rem;border-radius:20px;font-size:0.62rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);background:rgba(255,255,255,0.008);border:1px solid rgba(255,255,255,0.025);transition:var(--transition)}
+    .about-tags span i{color:var(--primary);font-size:0.5rem;width:10px;text-align:center}
+    .about-tags span:hover{background:rgba(255,255,255,0.015);border-color:rgba(255,255,255,0.04);color:var(--primary)}
 
     /* ===== SKILLS ===== */
     .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.2rem}
@@ -501,6 +513,13 @@
       .contact-pills a,.contact-pills span{font-size:0.68rem;padding:0.22rem 0.55rem}
       .exp-header h3{font-size:0.95rem}
       .section-icon{width:36px;height:36px;font-size:0.85rem}
+      .about-stats{flex-wrap:wrap;padding:0.8rem 1rem}
+      .about-stat{flex:1 1 45%;padding:0.4rem 0}
+      .about-stat+.about-stat{border-right:none}
+      .about-body-wrap{flex-direction:column;gap:1rem;padding:1.5rem}
+      .about-side{flex-direction:row;width:100%;gap:1rem}
+      .about-side .as-avatar{width:60px;height:60px;font-size:1rem}
+      .about-stat .as-num{font-size:0.95rem}
     }
 
     /* ===== PRINT ===== */
@@ -518,8 +537,18 @@
       .skill-row .s-track{display:none!important}
       .skill-row .s-pct{color:#0f766e!important;font-size:0.7rem!important;min-width:auto!important}
       .skill-row .s-pct span{color:#888!important}
-      .about-text,.exp-list li,.project-grid li,.achievements ul li{color:#444!important}
-      .about-text strong::after{display:none}
+      .about-content p,.exp-list li,.project-grid li,.achievements ul li{color:#444!important}
+      .about-stat .as-num{color:#0f766e!important}
+      .about-stat .as-icon{background:#f5f5f5!important;border-color:#ddd!important}
+      .about-stat .as-label{color:#888!important}
+      .about-stat+.about-stat{border-right-color:#ddd!important}
+      .about-stats{background:transparent!important;border-bottom-color:#ddd!important}
+      .about-side .as-avatar,.about-side .as-role,.about-side .as-tag{display:none!important}
+      .about-content .ac-quote{display:none!important}
+      .about-tags span{border-color:#ddd!important;color:#555!important;background:#f5f5f5!important;font-size:0.65rem!important;padding:0.15rem 0.5rem!important}
+      .about-tags span i{display:none!important}
+      .about-card .accent-bar{display:none!important}
+      .about-body-wrap{padding:0.5rem 0!important;gap:0!important}
       .tech-stack span,.course-badge{border-color:#ddd!important;color:#555!important;background:#f5f5f5!important}
       section{padding:1rem 0!important;page-break-inside:avoid}
       .timeline-dot{box-shadow:0 0 0 4px #fff!important}
@@ -596,19 +625,42 @@
         <div class="section-title-group"><h2>درباره من</h2><span class="en">/ About</span></div>
         <div class="section-line"></div>
       </div>
-      <div class="card" style="padding:2rem">
-        <div class="about-wrap">
-          <div class="about-main">
-            <div class="about-quote"><i class="fas fa-quote-right"></i></div>
-            <div class="about-body">
-              <p>مهندس داده و تحلیلگر ارشد داده با بیش از <strong>۶ سال تجربه</strong> در حوزه تحلیل داده، طراحی انبار داده (Data Warehouse)، توسعه فرآیندهای ETL و پیاده‌سازی راهکارهای هوش تجاری (BI). متخصص در طراحی داشبوردهای مدیریتی و عملیاتی با <strong>Power BI</strong>، توسعه مدل‌های داده، تحلیل داده‌های کسب‌وکار و ارائه گزارش‌های تحلیلی جهت پشتیبانی از تصمیم‌گیری مدیران. مسلط به <strong>SQL، Python</strong> و فناوری‌های داده‌های حجیم و علاقه‌مند به طراحی سیستم‌های داده‌محور و بهینه‌سازی فرآیندهای سازمانی.</p>
-              <div class="about-highlights">
-                <span><i class="fas fa-database"></i> Data Engineering</span>
-                <span><i class="fas fa-chart-line"></i> BI &amp; Analytics</span>
-                <span><i class="fas fa-warehouse"></i> Data Warehouse</span>
-                <span><i class="fas fa-bolt"></i> ETL &amp; Pipeline</span>
-                <span><i class="fas fa-chart-pie"></i> Dashboard Design</span>
-              </div>
+      <div class="card about-card reveal">
+        <div class="accent-bar"></div>
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="as-icon"><i class="fas fa-briefcase"></i></div>
+            <div><div class="as-num">۶+</div><div class="as-label">سال تجربه</div></div>
+          </div>
+          <div class="about-stat">
+            <div class="as-icon"><i class="fas fa-project-diagram"></i></div>
+            <div><div class="as-num">۱۲+</div><div class="as-label">پروژه</div></div>
+          </div>
+          <div class="about-stat">
+            <div class="as-icon"><i class="fas fa-tools"></i></div>
+            <div><div class="as-num">۲۵+</div><div class="as-label">ابزار و فناوری</div></div>
+          </div>
+          <div class="about-stat">
+            <div class="as-icon"><i class="fas fa-certificate"></i></div>
+            <div><div class="as-num">۱۰+</div><div class="as-label">گواهینامه</div></div>
+          </div>
+        </div>
+        <div class="about-body-wrap">
+          <div class="about-side">
+            <div class="as-avatar"><i class="fas fa-user-astronaut"></i></div>
+            <span class="as-tag"><i class="fas fa-check-circle"></i> Senior Level</span>
+            <span class="as-role">Data Engineer<br>&amp; BI Analyst</span>
+          </div>
+          <div class="about-content">
+            <div class="ac-quote">"</div>
+            <p>مهندس داده و تحلیلگر ارشد داده با بیش از <strong>۶ سال تجربه</strong> در حوزه تحلیل داده، طراحی انبار داده (Data Warehouse)، توسعه فرآیندهای ETL و پیاده‌سازی راهکارهای هوش تجاری (BI). متخصص در طراحی داشبوردهای مدیریتی و عملیاتی با <strong>Power BI</strong>، توسعه مدل‌های داده، تحلیل داده‌های کسب‌وکار و ارائه گزارش‌های تحلیلی جهت پشتیبانی از تصمیم‌گیری مدیران. مسلط به <strong>SQL، Python</strong> و فناوری‌های داده‌های حجیم و علاقه‌مند به طراحی سیستم‌های داده‌محور و بهینه‌سازی فرآیندهای سازمانی.</p>
+            <div class="about-tags">
+              <span><i class="fas fa-database"></i> Data Engineering</span>
+              <span><i class="fas fa-chart-line"></i> BI &amp; Analytics</span>
+              <span><i class="fas fa-warehouse"></i> Data Warehouse</span>
+              <span><i class="fas fa-bolt"></i> ETL Pipeline</span>
+              <span><i class="fas fa-chart-pie"></i> Dashboard Design</span>
+              <span><i class="fas fa-robot"></i> Machine Learning</span>
             </div>
           </div>
         </div>
