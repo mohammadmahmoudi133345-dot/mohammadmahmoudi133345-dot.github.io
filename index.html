@@ -296,6 +296,8 @@
     .sticky-side .ss-nav a i{width:16px;font-size:0.6rem;color:rgba(255,255,255,0.08)}
     .sticky-side .ss-nav a:hover{background:rgba(255,255,255,0.012);color:rgba(255,255,255,0.55)}
     .sticky-side .ss-nav a:hover i{color:var(--primary)}
+    .sticky-side .ss-nav a.active{background:rgba(0,212,170,0.02);color:rgba(255,255,255,0.65)}
+    .sticky-side .ss-nav a.active i{color:var(--primary)}
     .sticky-side .ss-links{display:flex;gap:0.5rem}
     .sticky-side .ss-links a{
       width:32px;height:32px;border-radius:50%;
@@ -1202,12 +1204,27 @@
       var ss=document.getElementById('stickySide');
       var mw=document.getElementById('mainWrap');
       var heroBottom=document.querySelector('.hero').offsetHeight;
+      var sections=document.querySelectorAll('section[id]');
+      var navLinks=ss&&ss.querySelectorAll('.ss-nav a');
+      function updateNav(){
+        if(!navLinks||!navLinks.length)return;
+        var top=window.scrollY+120;
+        var current='';
+        sections.forEach(function(s){
+          if(s.offsetTop<=top&&s.offsetTop+s.offsetHeight>top)current=s.id;
+        });
+        navLinks.forEach(function(a){
+          var href=a.getAttribute('href').replace('#','');
+          a.classList.toggle('active',href===current);
+        });
+      }
       window.addEventListener('scroll',function(){
         var v=window.scrollY>heroBottom*0.6;
         btn.classList.toggle('visible',v);
         dl.classList.toggle('visible',v);
         if(ss){ss.classList.toggle('visible',v)}
         if(mw){mw.classList.toggle('shifted',v)}
+        updateNav();
       },{passive:true});
     })();
 
