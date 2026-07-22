@@ -151,16 +151,23 @@
     @keyframes conicSpin{to{transform:rotate(360deg)}}
 
     .floating-badge{
-      position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);
-      background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.15);
-      color:var(--primary-light);font-size:0.6rem;font-weight:700;
-      padding:0.2rem 1rem;border-radius:50px;white-space:nowrap;
-      display:flex;align-items:center;gap:0.35rem;backdrop-filter:blur(8px);
-      box-shadow:0 4px 20px rgba(0,0,0,0.3);
-      animation:badgeFloat 4s ease-in-out infinite
+      position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
+      width:120px;height:120px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%,rgba(0,212,170,0.15),transparent 70%);
+      border:2px solid rgba(0,212,170,0.2);
+      display:flex;align-items:center;justify-content:center;
+      flex-direction:column;gap:0.2rem;
+      box-shadow:0 0 0 4px var(--bg),inset 0 0 20px rgba(0,212,170,0.1),0 4px 30px rgba(0,0,0,0.4);
+      backdrop-filter:blur(8px);
+      animation:stampPulse 5s ease-in-out infinite
     }
-    @keyframes badgeFloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
-    .floating-badge .star{font-size:0.5rem;color:var(--accent)}
+    @keyframes stampPulse{
+      0%,100%{border-color:rgba(0,212,170,0.2);box-shadow:0 0 0 4px var(--bg),inset 0 0 20px rgba(0,212,170,0.1),0 4px 30px rgba(0,0,0,0.4)}
+      50%{border-color:rgba(0,212,170,0.35);box-shadow:0 0 0 4px var(--bg),inset 0 0 30px rgba(0,212,170,0.2),0 0 30px rgba(0,212,170,0.15),0 4px 30px rgba(0,0,0,0.4)}
+    }
+    .floating-badge .star{font-size:0.7rem;color:var(--accent);filter:drop-shadow(0 0 6px rgba(0,212,170,0.3))}
+    .floating-badge .years{font-size:0.85rem;font-weight:800;color:var(--primary-light);font-family:'JetBrains Mono',monospace;line-height:1}
+    .floating-badge .label{font-size:0.5rem;color:rgba(0,212,170,0.4);font-family:'JetBrains Mono',monospace}
 
     .hero-right{text-align:right}
     .available-badge{
@@ -195,6 +202,10 @@
     }
     .hero-right h1 span.typing{border-left-color:transparent}
     @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .hero-dots{position:absolute;inset:0;pointer-events:none;z-index:1}
+    .hero-dot{position:absolute;border-radius:50%;background:var(--primary);opacity:0;animation:dotFade 6s ease-in-out infinite}
+    @keyframes dotFade{0%,100%{opacity:0;transform:scale(0.5)}50%{opacity:0.3;transform:scale(1)}}
+    .hero-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:inherit;filter:blur(6px);opacity:0.4}
     .hero-right .role{
       font-size:1.3rem;color:rgba(255,255,255,0.6);font-weight:600;
       margin-bottom:0.05rem;overflow:hidden;white-space:nowrap;
@@ -526,7 +537,7 @@
     @media print{
       @page{size:A4;margin:8mm}
       body{background:#fff!important;color:#111!important}
-      .no-print,.orb,.mesh-glow,.hero-grid,.particle,.scroll-down,.float-dl,.scroll-top{display:none!important}
+      .no-print,.orb,.mesh-glow,.hero-grid,.particle,.scroll-down,.float-dl,.scroll-top,.hero-dots,.geo{display:none!important}
       .hero{min-height:auto!important;padding:0!important}
       .card,.skill-card,.timeline-card,.project-card,.edu-card,.lang-card,.trait-card{background:#fff!important;border:1px solid #ddd!important;box-shadow:none!important;transform:none!important;backdrop-filter:none!important}
       .card::before,.card::after,.skill-card::before,.skill-card::after{display:none!important}
@@ -579,6 +590,7 @@
     <div class="mesh-glow no-print"></div>
     <div class="orb no-print"></div><div class="orb no-print"></div><div class="orb no-print"></div>
     <div class="geo no-print"></div><div class="geo no-print"></div><div class="geo no-print"></div><div class="geo no-print"></div><div class="geo no-print"></div>
+    <div class="hero-dots no-print"></div>
     <div class="no-print" id="particles"></div>
 
     <div class="hero-inner">
@@ -589,7 +601,7 @@
             <div class="avatar-ring"></div>
             <div class="avatar-frame"><span>م.م</span></div>
             <div class="avatar-glow-dot"></div>
-            <div class="floating-badge"><i class="fas fa-star star"></i> ۶+ سال تجربه</div>
+            <div class="floating-badge"><i class="fas fa-star star"></i><div><div class="years">۶+</div><div class="label">سال تجربه</div></div></div>
           </div>
         </div>
         <div class="hero-right">
@@ -1065,6 +1077,22 @@
         });
       },{threshold:0.2});
       document.querySelectorAll('.s-fill').forEach(function(el){so.observe(el);});
+    })();
+
+    (function(){
+      var hc=document.querySelector('.hero-dots');
+      var w=window.innerWidth,h=window.innerHeight;
+      for(var i=0;i<12;i++){
+        var d=document.createElement('div');
+        d.className='hero-dot';
+        var sx=Math.random()*w,sy=Math.random()*h;
+        d.style.left=sx+'px';d.style.top=sy+'px';
+        var sz=2+Math.random()*4;
+        d.style.width=sz+'px';d.style.height=sz+'px';
+        d.style.animationDelay=Math.random()*6+'s';
+        d.style.animationDuration=(4+Math.random()*4)+'s';
+        hc.appendChild(d);
+      }
     })();
 
     (function(){
