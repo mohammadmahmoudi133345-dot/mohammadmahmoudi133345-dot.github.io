@@ -594,7 +594,7 @@
     /* ===== PARTICLES.JS ===== */
     #particles-js{
       position:fixed;top:0;left:0;width:100vw;height:100vh;
-      z-index:0;pointer-events:none;background:transparent
+      z-index:0;background:transparent
     }
 
     /* ===== GLASS CARD ===== */
@@ -1476,15 +1476,15 @@
         }
       },
       interactivity:{
-        detect_on:'canvas',
+        detect_on:'window',
         events:{
-          onhover:{enable:true,mode:'grab'},
+          onhover:{enable:true,mode:'repulse'},
           onclick:{enable:true,mode:'push'},
           resize:true
         },
         modes:{
-          grab:{distance:200,line_linked:{opacity:0.3}},
-          push:{particles_nb:3}
+          repulse:{distance:120,duration:0.4},
+          push:{particles_nb:4}
         }
       },
       retina_detect:true
