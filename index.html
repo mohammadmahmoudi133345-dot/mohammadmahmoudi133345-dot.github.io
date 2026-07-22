@@ -133,7 +133,7 @@
     }
     .avatar-frame:hover{transform:scale(1.04);box-shadow:0 0 0 4px rgba(0,212,170,0.18),0 0 80px rgba(0,212,170,0.15)}
     .avatar-frame::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,0.35),transparent 50%);mix-blend-mode:overlay}
-    .avatar-frame span{position:relative;z-index:1;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3))}
+    .avatar-frame span{position:relative;z-index:1;font-size:2.2rem;color:rgba(255,255,255,0.4);filter:drop-shadow(0 0 20px rgba(0,0,0,0.2))}
     .avatar-ring{
       position:absolute;inset:-8px;border-radius:46px;
       border:1.5px solid rgba(0,212,170,0.08);
@@ -142,14 +142,6 @@
     @keyframes ringSpin{to{transform:rotate(360deg)}}
     .avatar-glow-dot{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:var(--primary);filter:blur(10px);opacity:0.8;animation:dotGlow 3s ease-in-out infinite}
     @keyframes dotGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
-    .avatar-badge-wrap::before{
-      content:'';position:absolute;inset:-14px;border-radius:54px;
-      background:conic-gradient(from 0deg,transparent,rgba(0,212,170,0.12),rgba(162,155,254,0.12),transparent);
-      animation:conicSpin 6s linear infinite;
-      mask-image:radial-gradient(ellipse at center,transparent 65%,black 66%);
-      -webkit-mask-image:radial-gradient(ellipse at center,transparent 65%,black 66%)
-    }
-    @keyframes conicSpin{to{transform:rotate(360deg)}}
 
     .floating-badge{
       position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
@@ -591,7 +583,7 @@
         <div class="hero-left">
           <div class="avatar-badge-wrap">
             <div class="avatar-ring"></div>
-            <div class="avatar-frame"><span>م.م</span></div>
+            <div class="avatar-frame"><span><i class="fas fa-user"></i></span></div>
             <div class="avatar-glow-dot"></div>
             <div class="floating-badge"><i class="fas fa-star star"></i><span class="fyears">۶+</span><span class="flabel">سال تجربه</span></div>
           </div>
