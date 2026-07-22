@@ -36,6 +36,12 @@
         radial-gradient(ellipse 40% 30% at 85% 100%,rgba(162,155,254,0.025),transparent 50%),
         radial-gradient(ellipse 30% 20% at 20% 70%,rgba(253,121,168,0.015),transparent 50%);
     }
+    .progress-bar{
+      position:fixed;top:0;left:0;height:2px;z-index:10000;
+      background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));
+      width:0%;transition:width 0.1s linear;
+      box-shadow:0 0 20px rgba(0,212,170,0.15)
+    }
     body::before{
       content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
       opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -589,8 +595,12 @@
     .scroll-top:hover{background:rgba(0,212,170,0.05);border-color:rgba(0,212,170,0.12);color:var(--primary);transform:translateY(-3px)}
 
     /* ===== REVEAL ===== */
-    .reveal{opacity:0;transform:translateY(35px);transition:opacity 0.9s ease,transform 0.9s cubic-bezier(0.16,1,0.3,1)}
+    .reveal{opacity:0;transform:translateY(35px);transition:opacity 0.7s ease,transform 0.7s cubic-bezier(0.16,1,0.3,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-scale{opacity:0;transform:scale(0.92);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(0.16,1,0.3,1)}
+    .reveal-scale.visible{opacity:1;transform:scale(1)}
+    .reveal-right{opacity:0;transform:translateX(-25px);transition:opacity 0.7s ease,transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+    .reveal-right.visible{opacity:1;transform:translateX(0)}
 
     /* ===== PDF VERSION ===== */
     #pdf-version{display:none}
@@ -679,6 +689,9 @@
   </style>
 </head>
 <body>
+
+  <!-- Progress bar -->
+  <div class="progress-bar no-print" id="progressBar"></div>
 
   <!-- Scroll to top -->
   <button class="scroll-top no-print" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="بازگشت به بالا"><i class="fas fa-arrow-up"></i></button>
@@ -779,7 +792,7 @@
         <div class="section-title-group"><h2>درباره من</h2><span class="en">/ About</span></div>
         <div class="section-line"></div>
       </div>
-      <div class="card about-card reveal">
+      <div class="card about-card reveal-scale">
         <div class="accent-bar"></div>
         <div class="about-stats">
           <div class="about-stat">
@@ -828,7 +841,7 @@
         <div class="section-line"></div>
       </div>
       <div class="skills-grid">
-        <div class="card skill-card reveal">
+        <div class="card skill-card reveal-scale">
           <h3><i class="fas fa-code"></i> زبان‌های برنامه‌نویسی</h3>
           <div class="skill-items">
             <div class="skill-row"><span class="s-num">۱</span><span class="s-name">Python</span><div class="s-bar"><div class="s-fill" data-pct="85"></div></div><span class="s-pct">۸۵<span>٪</span></span></div>
@@ -837,7 +850,7 @@
             <div class="skill-row"><span class="s-num">۴</span><span class="s-name">REST API</span><div class="s-bar"><div class="s-fill" data-pct="70"></div></div><span class="s-pct">۷۰<span>٪</span></span></div>
           </div>
         </div>
-        <div class="card skill-card reveal">
+        <div class="card skill-card reveal-scale">
           <h3><i class="fas fa-chart-bar"></i> هوش تجاری (BI)</h3>
           <div class="skill-items">
             <div class="skill-row"><span class="s-num">۱</span><span class="s-name">Power BI</span><div class="s-bar"><div class="s-fill" data-pct="88"></div></div><span class="s-pct">۸۸<span>٪</span></span></div>
@@ -849,7 +862,7 @@
             <div class="skill-row"><span class="s-num">۷</span><span class="s-name">KPI Design</span><div class="s-bar"><div class="s-fill" data-pct="80"></div></div><span class="s-pct">۸۰<span>٪</span></span></div>
           </div>
         </div>
-        <div class="card skill-card reveal">
+        <div class="card skill-card reveal-scale">
           <h3><i class="fas fa-database"></i> پایگاه داده</h3>
           <div class="skill-items">
             <div class="skill-row"><span class="s-num">۱</span><span class="s-name">SQL Server</span><div class="s-bar"><div class="s-fill" data-pct="85"></div></div><span class="s-pct">۸۵<span>٪</span></span></div>
@@ -858,7 +871,7 @@
             <div class="skill-row"><span class="s-num">۴</span><span class="s-name">Redis</span><div class="s-bar"><div class="s-fill" data-pct="58"></div></div><span class="s-pct">۵۸<span>٪</span></span></div>
           </div>
         </div>
-        <div class="card skill-card reveal">
+        <div class="card skill-card reveal-scale">
           <h3><i class="fas fa-cloud"></i> کلان‌داده (Big Data)</h3>
           <div class="skill-items">
             <div class="skill-row"><span class="s-num">۱</span><span class="s-name">Apache Kafka</span><div class="s-bar"><div class="s-fill" data-pct="70"></div></div><span class="s-pct">۷۰<span>٪</span></span></div>
@@ -867,7 +880,7 @@
             <div class="skill-row"><span class="s-num">۴</span><span class="s-name">Linux</span><div class="s-bar"><div class="s-fill" data-pct="75"></div></div><span class="s-pct">۷۵<span>٪</span></span></div>
           </div>
         </div>
-        <div class="card skill-card reveal">
+        <div class="card skill-card reveal-scale">
           <h3><i class="fas fa-brain"></i> علم داده و یادگیری ماشین</h3>
           <div class="skill-items">
             <div class="skill-row"><span class="s-num">۱</span><span class="s-name">Pandas</span><div class="s-bar"><div class="s-fill" data-pct="82"></div></div><span class="s-pct">۸۲<span>٪</span></span></div>
@@ -943,7 +956,7 @@
         <div class="section-title-group"><h2>پروژه‌های منتخب</h2><span class="en">/ Projects</span></div>
         <div class="section-line"></div>
       </div>
-      <div class="card project-card reveal">
+      <div class="card project-card reveal-right">
         <h3><i class="fas fa-database"></i> طراحی و پیاده‌سازی سیستم هوش تجاری شرکت کیمیا پلی</h3>
         <div class="project-grid">
           <li><span class="arrow">▸</span> تحلیل نیازهای کسب‌وکار</li>
@@ -963,18 +976,18 @@
           <div class="section-icon" style="width:36px;height:36px;font-size:0.85rem"><i class="fas fa-graduation-cap"></i></div>
           <div class="section-title-group"><h2 style="font-size:1.2rem">تحصیلات</h2><span class="en">/ Education</span></div>
         </div>
-        <div class="card edu-card reveal">
+        <div class="card edu-card reveal-right">
           <h3><i class="fas fa-university"></i> کارشناسی آمار</h3>
           <p class="school">دانشگاه صنعتی شاهرود</p>
           <span class="gpa"><i class="fas fa-star"></i> معدل: ۱۷.۶۵</span>
         </div>
       </section>
       <section>
-        <div class="section-header reveal" style="margin-bottom:1rem">
+        <div class="section-header reveal-right" style="margin-bottom:1rem">
           <div class="section-icon" style="width:36px;height:36px;font-size:0.85rem"><i class="fas fa-language"></i></div>
           <div class="section-title-group"><h2 style="font-size:1.2rem">زبان</h2><span class="en">/ Languages</span></div>
         </div>
-        <div class="card lang-card reveal">
+        <div class="card lang-card reveal-right">
           <div class="lang-item"><span class="name">فارسی</span><span class="level">زبان مادری</span></div>
           <div class="lang-item"><span class="name">انگلیسی</span><span class="level">متوسط — مطالعه مستندات تخصصی</span></div>
         </div>
@@ -1006,7 +1019,7 @@
         <div class="section-title-group"><h2>ویژگی‌های حرفه‌ای</h2><span class="en">/ Soft Skills</span></div>
         <div class="section-line"></div>
       </div>
-      <div class="traits-grid reveal">
+      <div class="traits-grid reveal-scale">
         <div class="trait-card"><i class="fas fa-chart-line"></i><span>تحلیل داده و حل مسئله</span></div>
         <div class="trait-card"><i class="fas fa-lightbulb"></i><span>تفکر تحلیلی</span></div>
         <div class="trait-card"><i class="fas fa-chart-bar"></i><span>طراحی داشبورد مدیریتی</span></div>
@@ -1173,9 +1186,15 @@
       var dl=document.getElementById('floatDl');
       var ss=document.getElementById('stickySide');
       var mw=document.getElementById('mainWrap');
+      var pb=document.getElementById('progressBar');
       var heroBottom=document.querySelector('.hero').offsetHeight;
       var sections=document.querySelectorAll('section[id]');
       var navLinks=ss&&ss.querySelectorAll('.ss-nav a');
+      function updateProgress(){
+        if(!pb)return;
+        var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+        pb.style.width=(window.scrollY/h*100)+'%';
+      }
       function updateNav(){
         if(!navLinks||!navLinks.length)return;
         var top=window.scrollY+120;
@@ -1194,6 +1213,7 @@
         dl.classList.toggle('visible',v);
         if(ss){ss.classList.toggle('visible',v)}
         if(mw){mw.classList.toggle('shifted',v)}
+        updateProgress();
         updateNav();
       },{passive:true});
     })();
@@ -1201,8 +1221,8 @@
     (function(){
       var obs=new IntersectionObserver(function(entries){
         entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
-      },{threshold:0.06,rootMargin:'0px 0px -30px 0px'});
-      document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+      },{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+      document.querySelectorAll('.reveal,.reveal-scale,.reveal-right').forEach(function(el){obs.observe(el);});
     })();
 
     (function(){
