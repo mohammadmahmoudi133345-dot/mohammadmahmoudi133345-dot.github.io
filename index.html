@@ -95,18 +95,6 @@
       33%{transform:translate(4%,-6%) scale(1.07)}
       66%{transform:translate(-3%,4%) scale(0.93)}
     }
-    .particle{
-      position:absolute;width:2px;height:2px;
-      background:linear-gradient(135deg,rgba(255,255,255,0.15),rgba(0,212,170,0.1));
-      border-radius:50%;animation:particleDrift linear infinite
-    }
-    @keyframes particleDrift{
-      0%{transform:translateY(0) rotate(0deg);opacity:0}
-      10%{opacity:1}
-      85%{opacity:1}
-      100%{transform:translateY(-120vh) rotate(360deg);opacity:0}
-    }
-
     .geo{position:absolute;border-radius:50%;pointer-events:none;opacity:0.15}
     .geo:nth-child(4){width:60px;height:60px;border:1.5px solid rgba(0,212,170,0.25);top:18%;right:8%;animation:geoDrift1 25s linear infinite}
     .geo:nth-child(5){width:35px;height:35px;border:1.5px solid rgba(162,155,254,0.2);bottom:22%;right:15%;animation:geoDrift2 20s linear infinite}
@@ -602,6 +590,32 @@
     .reveal-right{opacity:0;transform:translateX(-25px);transition:opacity 0.7s ease,transform 0.7s cubic-bezier(0.16,1,0.3,1)}
     .reveal-right.visible{opacity:1;transform:translateX(0)}
 
+    /* ===== NEURAL NET CANVAS ===== */
+    #neuralCanvas{
+      position:fixed;top:0;left:0;width:100vw;height:100vh;
+      z-index:0;pointer-events:none;opacity:0.5;
+      background:transparent
+    }
+
+    /* ===== GLASS CARD ===== */
+    .glass-card{
+      position:fixed;z-index:10001;pointer-events:none;
+      padding:1.2rem 1.5rem;border-radius:16px;
+      background:rgba(10,10,30,0.75);backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,0.04);
+      box-shadow:0 20px 60px rgba(0,0,0,0.5);
+      opacity:0;transform:translateY(8px) scale(0.96);
+      transition:opacity 0.35s ease,transform 0.35s cubic-bezier(0.16,1,0.3,1);
+      max-width:220px;direction:rtl
+    }
+    .glass-card.visible{opacity:1;transform:translateY(0) scale(1)}
+    .glass-card .gc-title{font-size:1rem;font-weight:800;color:var(--primary-light);margin-bottom:0.15rem}
+    .glass-card .gc-sub{font-size:0.6rem;color:var(--text-dim);margin-bottom:0.6rem;font-family:'JetBrains Mono',monospace}
+    .glass-card .gc-body{font-size:0.72rem;color:rgba(255,255,255,0.5);line-height:1.7}
+    .glass-card .gc-body .gc-row{display:flex;justify-content:space-between;gap:0.5rem;padding:0.15rem 0}
+    .glass-card .gc-body .gc-row span:first-child{color:rgba(255,255,255,0.2)}
+    .glass-card .gc-body .gc-row span:last-child{color:var(--primary)}
+
     /* ===== PDF VERSION ===== */
     #pdf-version{display:none}
 
@@ -649,7 +663,7 @@
     @media print{
       @page{size:A4;margin:8mm}
       body{background:#fff!important;color:#111!important}
-      .no-print,.orb,.mesh-glow,.hero-grid,.particle,.scroll-down,.float-dl,.scroll-top,.sticky-side,.search-overlay,.progress-bar{display:none!important}
+      .no-print,.orb,.mesh-glow,.hero-grid,.scroll-down,.float-dl,.scroll-top,.sticky-side,.search-overlay,.progress-bar,#neuralCanvas{display:none!important}
       .hero{min-height:auto!important;padding:0!important}
       .card,.skill-card,.timeline-card,.project-card,.edu-card,.lang-card,.trait-card{background:#fff!important;border:1px solid #ddd!important;box-shadow:none!important;transform:none!important;backdrop-filter:none!important}
       .card::before,.card::after,.skill-card::before,.skill-card::after{display:none!important}
@@ -693,6 +707,16 @@
   <!-- Progress bar -->
   <div class="progress-bar no-print" id="progressBar"></div>
 
+  <!-- Neural net canvas -->
+  <canvas id="neuralCanvas" class="no-print"></canvas>
+
+  <!-- Glass card for neural net -->
+  <div class="glass-card no-print" id="glassCard">
+    <div class="gc-title"></div>
+    <div class="gc-sub"></div>
+    <div class="gc-body"></div>
+  </div>
+
   <!-- Scroll to top -->
   <button class="scroll-top no-print" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="بازگشت به بالا"><i class="fas fa-arrow-up"></i></button>
 
@@ -706,7 +730,6 @@
     <div class="mesh-glow no-print"></div>
     <div class="orb no-print"></div><div class="orb no-print"></div><div class="orb no-print"></div>
     <div class="geo no-print"></div><div class="geo no-print"></div><div class="geo no-print"></div><div class="geo no-print"></div><div class="geo no-print"></div>
-    <div class="no-print" id="particles"></div>
 
     <div class="hero-inner">
       <div class="hero-watermark no-print">✦  R E S U M E  ✦</div>
@@ -1174,16 +1197,6 @@
 
   <script>
     (function(){
-      var c=document.getElementById('particles');if(!c)return;
-      for(var i=0;i<30;i++){var p=document.createElement('div');p.className='particle';
-        p.style.left=Math.random()*100+'%';p.style.bottom='-5%';
-        p.style.animationDuration=(14+Math.random()*20)+'s';
-        p.style.animationDelay=(Math.random()*16)+'s';
-        p.style.width=(2+Math.random()*3)+'px';p.style.height=p.style.width;
-        c.appendChild(p);}
-    })();
-
-    (function(){
       var btn=document.getElementById('scrollTop');
       var dl=document.getElementById('floatDl');
       var ss=document.getElementById('stickySide');
@@ -1432,6 +1445,273 @@
         if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch();}
         if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(e.target.tagName)){e.preventDefault();openSearch();}
       });
+    })();
+
+    /* ===== NEURAL NETWORK ===== */
+    (function(){
+      var canvas=document.getElementById('neuralCanvas');
+      if(!canvas)return;
+      var ctx=canvas.getContext('2d');
+      var W,H,mouse={x:-9999,y:-9999},nodes=[],edges=[],pulses=[],frame,cls=document.getElementById('glassCard');
+      var PR = window.devicePixelRatio || 1;
+      var isMobile = window.innerWidth < 768;
+      var count = isMobile ? 30 : 90;
+
+      var palette = {
+        bg:'#050816', primary:'#554DEE', glow:'#00E5FF',
+        secondary:'#8B5CF6', warn:'#FF4D6D', dim:'rgba(85,77,238,0.15)'
+      };
+
+      function resize(){
+        W=window.innerWidth;H=window.innerHeight;
+        canvas.width=W*PR;canvas.height=H*PR;
+        canvas.style.width=W+'px';canvas.style.height=H+'px';
+        ctx.setTransform(PR,0,0,PR,0,0);
+      }
+      window.addEventListener('resize',resize);
+
+      var skillData = {
+        'SQL':{exp:'۵ سال',pro:'انبار داده، داشبورد'},
+        'Python':{exp:'۴ سال',pro:'ETL، تحلیل داده'},
+        'Power BI':{exp:'۴ سال',pro:'داشبورد مدیریتی'},
+        'Data Warehouse':{exp:'۳ سال',pro:'مدل‌سازی ستاره‌ای'},
+        'ETL':{exp:'۴ سال',pro:'SSIS، Apache Airflow'},
+        'Machine Learning':{exp:'۲ سال',pro:'پیش‌بینی، خوشه‌بندی'},
+        'AI':{exp:'۲ سال',pro:'NLP، بینایی ماشین'},
+        'Statistics':{exp:'۵ سال',pro:'تحلیل آماری، A/B تست'}
+      };
+
+      function node(x,y,label,type){
+        return {
+          x:x,y:y,ox:x,oy:y,
+          vx:0,vy:0,label:label||'',type:type||'normal',
+          radius:type==='center'?22:type==='skill'?14:type==='output'?10:8,
+          active:0,bright:1,phase:Math.random()*Math.PI*2,
+          skill:skillData[label]||null
+        };
+      }
+
+      function buildNetwork(){
+        nodes=[];edges=[];pulses=[];
+        var cx=W/2,cy=H/2;
+        var layerGap=W*0.15;
+        var levels=[
+          {count:5,label:['Python','SQL','Power BI','Statistics','ETL'],type:'input',x:cx-layerGap*1.5},
+          {count:7,label:[],type:'hidden',x:cx-layerGap*0.5},
+          {count:6,label:[],type:'hidden',x:cx+layerGap*0.5},
+          {count:4,label:['Data Analyst','BI Expert','ML Engineer','AI Specialist'],type:'output',x:cx+layerGap*1.5}
+        ];
+        // center super node
+        nodes.push(node(cx,cy,'MOHAMMAD','center'));
+        // build layers
+        levels.forEach(function(lev){
+          var spacing=Math.min((H*0.65)/(lev.count+1),60);
+          var startY=cy-(lev.count-1)*spacing/2;
+          for(var i=0;i<lev.count;i++){
+            var n=node(lev.x,startY+i*spacing,lev.label[i]||'',lev.type);
+            nodes.push(n);
+          }
+        });
+        // connect nearby nodes (within distance)
+        for(var i=0;i<nodes.length;i++){
+          for(var j=i+1;j<nodes.length;j++){
+            var dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+            var d=Math.sqrt(dx*dx+dy*dy);
+            if(d<W*0.35&&d>20){
+              edges.push({a:i,b:b,d:d,op:0});
+            }
+          }
+        }
+      }
+
+      function spawnPulse(){
+        var idx=Math.floor(Math.random()*nodes.length);
+        var n=nodes[idx];
+        n.active=1;
+        // find connected edges
+        for(var i=0;i<edges.length;i++){
+          var e=edges[i];
+          if(e.a===idx||e.b===idx){
+            pulses.push({from:idx,to:e.a===idx?e.b:e.a,progress:0,speed:0.006+Math.random()*0.008,node:nodes[e.a===idx?e.b:e.a]});
+          }
+        }
+      }
+
+      var gcData=null;
+
+      function render(){
+        ctx.clearRect(0,0,W,H);
+        // draw connections
+        for(var i=0;i<edges.length;i++){
+          var e=edges[i],na=nodes[e.a],nb=nodes[e.b];
+          var dx=na.x-nb.x,dy=na.y-nb.y;
+          var dist=Math.sqrt(dx*dx+dy*dy);
+          var maxD=W*0.35;
+          var alpha=Math.max(0,1-dist/maxD)*0.25;
+          if(na.active>0.01||nb.active>0.01)alpha=Math.max(alpha,0.4);
+          // mouse proximity
+          var mx=(na.x+nb.x)/2,my=(na.y+nb.y)/2;
+          var md=Math.sqrt((mx-mouse.x)**2+(my-mouse.y)**2);
+          if(md<150)alpha=Math.min(1,alpha+0.3*(1-md/150));
+          if(alpha<0.01)continue;
+          ctx.beginPath();
+          ctx.moveTo(na.x,na.y);
+          ctx.lineTo(nb.x,nb.y);
+          ctx.strokeStyle='rgba(0,229,255,'+(alpha*0.6)+')';
+          ctx.lineWidth=0.6+alpha*0.8;
+          ctx.stroke();
+        }
+        // draw pulses
+        for(var i=pulses.length-1;i>=0;i--){
+          var p=pulses[i];
+          p.progress+=p.speed;
+          if(p.progress>=1){pulses.splice(i,1);continue;}
+          var na=nodes[p.from],nb=nodes[p.to];
+          var px=na.x+(nb.x-na.x)*p.progress;
+          var py=na.y+(nb.y-na.y)*p.progress;
+          var pulseAlpha=1-Math.abs(p.progress-0.5)*2;
+          ctx.beginPath();
+          ctx.arc(px,py,2.5+pulseAlpha*2,0,Math.PI*2);
+          ctx.fillStyle='rgba(0,229,255,'+(pulseAlpha*0.9)+')';
+          ctx.fill();
+          ctx.shadowColor='rgba(0,229,255,0.6)';
+          ctx.shadowBlur=12;
+          ctx.fill();
+          ctx.shadowBlur=0;
+        }
+        // draw nodes
+        for(var i=0;i<nodes.length;i++){
+          var n=nodes[i];
+          n.active=Math.max(0,n.active-0.008);
+          var act=n.active>0.01;
+          var glw=act?30:0;
+          if(n.type==='center'){
+            // super node
+            var grad=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,35);
+            grad.addColorStop(0,'rgba(85,77,238,0.25)');
+            grad.addColorStop(0.5,'rgba(0,229,255,0.08)');
+            grad.addColorStop(1,'transparent');
+            ctx.beginPath();ctx.arc(n.x,n.y,35,0,Math.PI*2);
+            ctx.fillStyle=grad;ctx.fill();
+            // glow ring
+            ctx.beginPath();ctx.arc(n.x,n.y,22+Math.sin(Date.now()*0.002)*3,0,Math.PI*2);
+            ctx.strokeStyle='rgba(0,229,255,0.15)';ctx.lineWidth=1.5;
+            ctx.stroke();
+            ctx.beginPath();ctx.arc(n.x,n.y,28+Math.cos(Date.now()*0.003)*4,0,Math.PI*2);
+            ctx.strokeStyle='rgba(85,77,238,0.08)';ctx.lineWidth=1;
+            ctx.stroke();
+          }
+          // draw glow for active
+          if(act){
+            ctx.shadowBlur=20;ctx.shadowColor='rgba(0,229,255,0.5)';
+          }
+          var col=n.type==='center'?'#554DEE':n.type==='skill'?'#00E5FF':n.type==='output'?'#8B5CF6':'#00E5FF';
+          if(n.skill)col='#00E5FF';
+          ctx.beginPath();ctx.arc(n.x,n.y,n.radius,0,Math.PI*2);
+          ctx.fillStyle=act?col:'rgba(0,229,255,0.08)';
+          ctx.fill();
+          if(n.type==='center'||n.skill){
+            ctx.beginPath();ctx.arc(n.x,n.y,n.radius+4,0,Math.PI*2);
+            ctx.strokeStyle='rgba(0,229,255,'+(act?0.2:0.04)+')';
+            ctx.lineWidth=1;ctx.stroke();
+          }
+          ctx.shadowBlur=0;
+          // label
+          if(n.label){
+            ctx.fillStyle='rgba(255,255,255,0.15)';
+            ctx.font=(n.type==='center'?'11px':'8px')+" 'Vazirmatn',sans-serif";
+            ctx.textAlign='center';ctx.textBaseline='top';
+            ctx.fillText(n.label,n.x,n.y+n.radius+6);
+          }
+          // mouse proximity
+          var mdx=mouse.x-n.x,mdy=mouse.y-n.y;
+          var mdist=Math.sqrt(mdx*mdx+mdy*mdy);
+          if(mdist<120&&mdist>5){
+            var force=(120-mdist)/120*0.3;
+            n.vx+=mdx/mdist*force;
+            n.vy+=mdy/mdist*force;
+          }
+          // drift
+          n.vx+=Math.sin(Date.now()*0.001+n.phase)*0.006;
+          n.vy+=Math.cos(Date.now()*0.0013+n.phase*1.3)*0.006;
+          n.vx*=0.94;n.vy*=0.94;
+          n.x+=n.vx;n.y+=n.vy;
+          // spring back
+          n.x+=(n.ox-n.x)*0.004;
+          n.y+=(n.oy-n.y)*0.004;
+        }
+        // glass card
+        if(gcData){
+          var nn=gcData.node;
+          var mdx=mouse.x-nn.x,mdy=mouse.y-nn.y;
+          var mdist=Math.sqrt(mdx*mdx+mdy*mdy);
+          if(mdist<nn.radius+20&&nn.skill){
+            cls.querySelector('.gc-title').textContent=nn.label;
+            cls.querySelector('.gc-sub').textContent='Data Analyst';
+            var html='<div class="gc-row"><span>تجربه</span><span>'+nn.skill.exp+'</span></div>';
+            html+='<div class="gc-row"><span>پروژه‌ها</span><span>'+nn.skill.pro+'</span></div>';
+            cls.querySelector('.gc-body').innerHTML=html;
+            cls.classList.add('visible');
+            var cx=nn.x+25,cy=nn.y-30;
+            if(cx+240>W)cx=nn.x-240;
+            if(cy<10)cy=10;
+            if(cy+120>H)cy=H-130;
+            cls.style.left=cx+'px';cls.style.top=cy+'px';
+          }else{
+            cls.classList.remove('visible');
+          }
+        }
+        frame=requestAnimationFrame(render);
+      }
+
+      // init
+      resize();
+      buildNetwork();
+      // animate in
+      for(var i=0;i<nodes.length;i++){
+        (function(idx){
+          setTimeout(function(){
+            nodes[idx].active=1;
+          },idx*20);
+        })(i);
+      }
+      setInterval(spawnPulse,3000);
+      // mouse tracking
+      document.addEventListener('mousemove',function(e){
+        mouse.x=e.clientX;mouse.y=e.clientY;
+        // find nearest skill node
+        var minD=Infinity,best=null;
+        for(var i=0;i<nodes.length;i++){
+          if(!nodes[i].skill)continue;
+          var dx=mouse.x-nodes[i].x,dy=mouse.y-nodes[i].y;
+          var d=Math.sqrt(dx*dx+dy*dy);
+          if(d<minD){minD=d;best=nodes[i];}
+        }
+        gcData=best?{node:best}:null;
+      });
+      document.addEventListener('mouseleave',function(){
+        mouse.x=-9999;mouse.y=-9999;gcData=null;
+        cls&&cls.classList.remove('visible');
+      });
+      // touch support
+      document.addEventListener('touchmove',function(e){
+        var t=e.touches[0];
+        mouse.x=t.clientX;mouse.y=t.clientY;
+      },{passive:true});
+      document.addEventListener('touchend',function(){
+        mouse.x=-9999;mouse.y=-9999;
+      });
+      // rebuild on resize
+      var resizeTimer;
+      window.addEventListener('resize',function(){
+        clearTimeout(resizeTimer);
+        resizeTimer=setTimeout(function(){
+          cancelAnimationFrame(frame);
+          buildNetwork();
+          render();
+        },300);
+      });
+      render();
     })();
   </script>
 </body>
