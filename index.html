@@ -250,10 +250,10 @@
 
     /* ===== STICKY SIDE ===== */
     .sticky-side{
-      position:fixed;top:0;inset-inline-end:0;z-index:999;
+      position:fixed;top:0;right:0;left:auto;z-index:999;
       width:220px;height:100vh;
       display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:2.5rem;
-      background:rgba(4,4,14,0.72);border-inline-start:1px solid rgba(255,255,255,0.03);
+      background:rgba(4,4,14,0.72);border-left:1px solid rgba(255,255,255,0.03);
       backdrop-filter:blur(24px);
       transform:translateX(100%);opacity:0;pointer-events:none;
       transition:transform 0.55s cubic-bezier(0.16,1,0.3,1),opacity 0.4s ease;
@@ -292,7 +292,7 @@
 
     /* ===== CONTENT SHIFT ===== */
     .main-wrap{transition:padding-inline-end 0.55s cubic-bezier(0.16,1,0.3,1)}
-    .main-wrap.shifted{padding-inline-end:220px}
+    .main-wrap.shifted{padding-right:220px}
 
     /* ===== SEARCH MODAL ===== */
     .search-overlay{
