@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -590,11 +591,10 @@
     .reveal-right{opacity:0;transform:translateX(-25px);transition:opacity 0.7s ease,transform 0.7s cubic-bezier(0.16,1,0.3,1)}
     .reveal-right.visible{opacity:1;transform:translateX(0)}
 
-    /* ===== NEURAL NET CANVAS ===== */
-    #neuralCanvas{
+    /* ===== PARTICLES.JS ===== */
+    #particles-js{
       position:fixed;top:0;left:0;width:100vw;height:100vh;
-      z-index:0;pointer-events:none;opacity:0.5;
-      background:transparent
+      z-index:0;pointer-events:none;background:transparent
     }
 
     /* ===== GLASS CARD ===== */
@@ -663,7 +663,7 @@
     @media print{
       @page{size:A4;margin:8mm}
       body{background:#fff!important;color:#111!important}
-      .no-print,.orb,.mesh-glow,.hero-grid,.scroll-down,.float-dl,.scroll-top,.sticky-side,.search-overlay,.progress-bar,#neuralCanvas{display:none!important}
+      .no-print,.orb,.mesh-glow,.hero-grid,.scroll-down,.float-dl,.scroll-top,.sticky-side,.search-overlay,.progress-bar,#particles-js{display:none!important}
       .hero{min-height:auto!important;padding:0!important}
       .card,.skill-card,.timeline-card,.project-card,.edu-card,.lang-card,.trait-card{background:#fff!important;border:1px solid #ddd!important;box-shadow:none!important;transform:none!important;backdrop-filter:none!important}
       .card::before,.card::after,.skill-card::before,.skill-card::after{display:none!important}
@@ -707,10 +707,10 @@
   <!-- Progress bar -->
   <div class="progress-bar no-print" id="progressBar"></div>
 
-  <!-- Neural net canvas -->
-  <canvas id="neuralCanvas" class="no-print"></canvas>
+  <!-- Particles.js canvas -->
+  <div id="particles-js" class="no-print"></div>
 
-  <!-- Glass card for neural net -->
+  <!-- Glass info card -->
   <div class="glass-card no-print" id="glassCard">
     <div class="gc-title"></div>
     <div class="gc-sub"></div>
@@ -1447,271 +1447,86 @@
       });
     })();
 
-    /* ===== NEURAL NETWORK ===== */
+    /* ===== PARTICLES.JS — شبکه عصبی خلاقانه ===== */
+    particlesJS('particles-js',{
+      particles:{
+        number:{value:80,density:{enable:true,value_area:800}},
+        color:{value:['#554DEE','#00E5FF','#8B5CF6','#FF4D6D']},
+        shape:{
+          type:['circle','polygon'],
+          polygon:{nb_sides:6},
+          stroke:{width:0,color:'#000'}
+        },
+        opacity:{
+          value:0.3,random:true,
+          anim:{enable:true,speed:0.6,opacity_min:0.05,sync:false}
+        },
+        size:{
+          value:4,random:true,
+          anim:{enable:true,speed:2,size_min:0.5,sync:false}
+        },
+        line_linked:{
+          enable:true,distance:140,color:'#00E5FF',
+          opacity:0.08,width:0.8
+        },
+        move:{
+          enable:true,speed:0.8,direction:'none',random:true,
+          straight:false,out_mode:'bounce',bounce:true,
+          attract:{enable:true,rotateX:600,rotateY:1200}
+        }
+      },
+      interactivity:{
+        detect_on:'canvas',
+        events:{
+          onhover:{enable:true,mode:'grab'},
+          onclick:{enable:true,mode:'push'},
+          resize:true
+        },
+        modes:{
+          grab:{distance:200,line_linked:{opacity:0.3}},
+          push:{particles_nb:3}
+        }
+      },
+      retina_detect:true
+    });
+
+    /* ===== Glass card بر اساس موس ===== */
     (function(){
-      var canvas=document.getElementById('neuralCanvas');
-      if(!canvas)return;
-      var ctx=canvas.getContext('2d');
-      var W,H,mouse={x:-9999,y:-9999},nodes=[],edges=[],pulses=[],frame,cls=document.getElementById('glassCard');
-      var PR = window.devicePixelRatio || 1;
-      var isMobile = window.innerWidth < 768;
-      var count = isMobile ? 30 : 90;
-
-      var palette = {
-        bg:'#050816', primary:'#554DEE', glow:'#00E5FF',
-        secondary:'#8B5CF6', warn:'#FF4D6D', dim:'rgba(85,77,238,0.15)'
-      };
-
-      function resize(){
-        W=window.innerWidth;H=window.innerHeight;
-        canvas.width=W*PR;canvas.height=H*PR;
-        canvas.style.width=W+'px';canvas.style.height=H+'px';
-        ctx.setTransform(PR,0,0,PR,0,0);
-      }
-      window.addEventListener('resize',resize);
-
-      var skillData = {
-        'SQL':{exp:'۵ سال',pro:'انبار داده، داشبورد'},
-        'Python':{exp:'۴ سال',pro:'ETL، تحلیل داده'},
-        'Power BI':{exp:'۴ سال',pro:'داشبورد مدیریتی'},
-        'Data Warehouse':{exp:'۳ سال',pro:'مدل‌سازی ستاره‌ای'},
-        'ETL':{exp:'۴ سال',pro:'SSIS، Apache Airflow'},
-        'Machine Learning':{exp:'۲ سال',pro:'پیش‌بینی، خوشه‌بندی'},
-        'AI':{exp:'۲ سال',pro:'NLP، بینایی ماشین'},
-        'Statistics':{exp:'۵ سال',pro:'تحلیل آماری، A/B تست'}
-      };
-
-      function node(x,y,label,type){
-        return {
-          x:x,y:y,ox:x,oy:y,
-          vx:0,vy:0,label:label||'',type:type||'normal',
-          radius:type==='center'?22:type==='skill'?14:type==='output'?10:8,
-          active:0,bright:1,phase:Math.random()*Math.PI*2,
-          skill:skillData[label]||null
-        };
-      }
-
-      function buildNetwork(){
-        nodes=[];edges=[];pulses=[];
-        var cx=W/2,cy=H/2;
-        var layerGap=W*0.15;
-        var levels=[
-          {count:5,label:['Python','SQL','Power BI','Statistics','ETL'],type:'input',x:cx-layerGap*1.5},
-          {count:7,label:[],type:'hidden',x:cx-layerGap*0.5},
-          {count:6,label:[],type:'hidden',x:cx+layerGap*0.5},
-          {count:4,label:['Data Analyst','BI Expert','ML Engineer','AI Specialist'],type:'output',x:cx+layerGap*1.5}
-        ];
-        // center super node
-        nodes.push(node(cx,cy,'MOHAMMAD','center'));
-        // build layers
-        levels.forEach(function(lev){
-          var spacing=Math.min((H*0.65)/(lev.count+1),60);
-          var startY=cy-(lev.count-1)*spacing/2;
-          for(var i=0;i<lev.count;i++){
-            var n=node(lev.x,startY+i*spacing,lev.label[i]||'',lev.type);
-            nodes.push(n);
-          }
-        });
-        // connect nearby nodes (within distance)
-        for(var i=0;i<nodes.length;i++){
-          for(var j=i+1;j<nodes.length;j++){
-            var dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
-            var d=Math.sqrt(dx*dx+dy*dy);
-            if(d<W*0.35&&d>20){
-              edges.push({a:i,b:b,d:d,op:0});
-            }
-          }
-        }
-      }
-
-      function spawnPulse(){
-        var idx=Math.floor(Math.random()*nodes.length);
-        var n=nodes[idx];
-        n.active=1;
-        // find connected edges
-        for(var i=0;i<edges.length;i++){
-          var e=edges[i];
-          if(e.a===idx||e.b===idx){
-            pulses.push({from:idx,to:e.a===idx?e.b:e.a,progress:0,speed:0.006+Math.random()*0.008,node:nodes[e.a===idx?e.b:e.a]});
-          }
-        }
-      }
-
-      var gcData=null;
-
-      function render(){
-        ctx.clearRect(0,0,W,H);
-        // draw connections
-        for(var i=0;i<edges.length;i++){
-          var e=edges[i],na=nodes[e.a],nb=nodes[e.b];
-          var dx=na.x-nb.x,dy=na.y-nb.y;
-          var dist=Math.sqrt(dx*dx+dy*dy);
-          var maxD=W*0.35;
-          var alpha=Math.max(0,1-dist/maxD)*0.25;
-          if(na.active>0.01||nb.active>0.01)alpha=Math.max(alpha,0.4);
-          // mouse proximity
-          var mx=(na.x+nb.x)/2,my=(na.y+nb.y)/2;
-          var md=Math.sqrt((mx-mouse.x)**2+(my-mouse.y)**2);
-          if(md<150)alpha=Math.min(1,alpha+0.3*(1-md/150));
-          if(alpha<0.01)continue;
-          ctx.beginPath();
-          ctx.moveTo(na.x,na.y);
-          ctx.lineTo(nb.x,nb.y);
-          ctx.strokeStyle='rgba(0,229,255,'+(alpha*0.6)+')';
-          ctx.lineWidth=0.6+alpha*0.8;
-          ctx.stroke();
-        }
-        // draw pulses
-        for(var i=pulses.length-1;i>=0;i--){
-          var p=pulses[i];
-          p.progress+=p.speed;
-          if(p.progress>=1){pulses.splice(i,1);continue;}
-          var na=nodes[p.from],nb=nodes[p.to];
-          var px=na.x+(nb.x-na.x)*p.progress;
-          var py=na.y+(nb.y-na.y)*p.progress;
-          var pulseAlpha=1-Math.abs(p.progress-0.5)*2;
-          ctx.beginPath();
-          ctx.arc(px,py,2.5+pulseAlpha*2,0,Math.PI*2);
-          ctx.fillStyle='rgba(0,229,255,'+(pulseAlpha*0.9)+')';
-          ctx.fill();
-          ctx.shadowColor='rgba(0,229,255,0.6)';
-          ctx.shadowBlur=12;
-          ctx.fill();
-          ctx.shadowBlur=0;
-        }
-        // draw nodes
-        for(var i=0;i<nodes.length;i++){
-          var n=nodes[i];
-          n.active=Math.max(0,n.active-0.008);
-          var act=n.active>0.01;
-          var glw=act?30:0;
-          if(n.type==='center'){
-            // super node
-            var grad=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,35);
-            grad.addColorStop(0,'rgba(85,77,238,0.25)');
-            grad.addColorStop(0.5,'rgba(0,229,255,0.08)');
-            grad.addColorStop(1,'transparent');
-            ctx.beginPath();ctx.arc(n.x,n.y,35,0,Math.PI*2);
-            ctx.fillStyle=grad;ctx.fill();
-            // glow ring
-            ctx.beginPath();ctx.arc(n.x,n.y,22+Math.sin(Date.now()*0.002)*3,0,Math.PI*2);
-            ctx.strokeStyle='rgba(0,229,255,0.15)';ctx.lineWidth=1.5;
-            ctx.stroke();
-            ctx.beginPath();ctx.arc(n.x,n.y,28+Math.cos(Date.now()*0.003)*4,0,Math.PI*2);
-            ctx.strokeStyle='rgba(85,77,238,0.08)';ctx.lineWidth=1;
-            ctx.stroke();
-          }
-          // draw glow for active
-          if(act){
-            ctx.shadowBlur=20;ctx.shadowColor='rgba(0,229,255,0.5)';
-          }
-          var col=n.type==='center'?'#554DEE':n.type==='skill'?'#00E5FF':n.type==='output'?'#8B5CF6':'#00E5FF';
-          if(n.skill)col='#00E5FF';
-          ctx.beginPath();ctx.arc(n.x,n.y,n.radius,0,Math.PI*2);
-          ctx.fillStyle=act?col:'rgba(0,229,255,0.08)';
-          ctx.fill();
-          if(n.type==='center'||n.skill){
-            ctx.beginPath();ctx.arc(n.x,n.y,n.radius+4,0,Math.PI*2);
-            ctx.strokeStyle='rgba(0,229,255,'+(act?0.2:0.04)+')';
-            ctx.lineWidth=1;ctx.stroke();
-          }
-          ctx.shadowBlur=0;
-          // label
-          if(n.label){
-            ctx.fillStyle='rgba(255,255,255,0.15)';
-            ctx.font=(n.type==='center'?'11px':'8px')+" 'Vazirmatn',sans-serif";
-            ctx.textAlign='center';ctx.textBaseline='top';
-            ctx.fillText(n.label,n.x,n.y+n.radius+6);
-          }
-          // mouse proximity
-          var mdx=mouse.x-n.x,mdy=mouse.y-n.y;
-          var mdist=Math.sqrt(mdx*mdx+mdy*mdy);
-          if(mdist<120&&mdist>5){
-            var force=(120-mdist)/120*0.3;
-            n.vx+=mdx/mdist*force;
-            n.vy+=mdy/mdist*force;
-          }
-          // drift
-          n.vx+=Math.sin(Date.now()*0.001+n.phase)*0.006;
-          n.vy+=Math.cos(Date.now()*0.0013+n.phase*1.3)*0.006;
-          n.vx*=0.94;n.vy*=0.94;
-          n.x+=n.vx;n.y+=n.vy;
-          // spring back
-          n.x+=(n.ox-n.x)*0.004;
-          n.y+=(n.oy-n.y)*0.004;
-        }
-        // glass card
-        if(gcData){
-          var nn=gcData.node;
-          var mdx=mouse.x-nn.x,mdy=mouse.y-nn.y;
-          var mdist=Math.sqrt(mdx*mdx+mdy*mdy);
-          if(mdist<nn.radius+20&&nn.skill){
-            cls.querySelector('.gc-title').textContent=nn.label;
-            cls.querySelector('.gc-sub').textContent='Data Analyst';
-            var html='<div class="gc-row"><span>تجربه</span><span>'+nn.skill.exp+'</span></div>';
-            html+='<div class="gc-row"><span>پروژه‌ها</span><span>'+nn.skill.pro+'</span></div>';
-            cls.querySelector('.gc-body').innerHTML=html;
-            cls.classList.add('visible');
-            var cx=nn.x+25,cy=nn.y-30;
-            if(cx+240>W)cx=nn.x-240;
-            if(cy<10)cy=10;
-            if(cy+120>H)cy=H-130;
-            cls.style.left=cx+'px';cls.style.top=cy+'px';
-          }else{
-            cls.classList.remove('visible');
-          }
-        }
-        frame=requestAnimationFrame(render);
-      }
-
-      // init
-      resize();
-      buildNetwork();
-      // animate in
-      for(var i=0;i<nodes.length;i++){
-        (function(idx){
-          setTimeout(function(){
-            nodes[idx].active=1;
-          },idx*20);
-        })(i);
-      }
-      setInterval(spawnPulse,3000);
-      // mouse tracking
+      var gc=document.getElementById('glassCard');
+      if(!gc)return;
+      var skills=[
+        {x:0.15,y:0.3,title:'SQL',exp:'۵ سال',pro:'انبار داده، داشبورد'},
+        {x:0.12,y:0.45,title:'Python',exp:'۴ سال',pro:'ETL، تحلیل داده'},
+        {x:0.18,y:0.6,title:'Power BI',exp:'۴ سال',pro:'داشبورد مدیریتی'},
+        {x:0.82,y:0.25,title:'AI',exp:'۲ سال',pro:'NLP، بینایی ماشین'},
+        {x:0.85,y:0.4,title:'ML',exp:'۲ سال',pro:'پیش‌بینی، خوشه‌بندی'},
+        {x:0.8,y:0.55,title:'Statistics',exp:'۵ سال',pro:'تحلیل آماری'}
+      ];
+      var r=function(){return Math.random()*2-1;};
+      var offsets=skills.map(function(){return {dx:r()*8,dy:r()*8};});
       document.addEventListener('mousemove',function(e){
-        mouse.x=e.clientX;mouse.y=e.clientY;
-        // find nearest skill node
-        var minD=Infinity,best=null;
-        for(var i=0;i<nodes.length;i++){
-          if(!nodes[i].skill)continue;
-          var dx=mouse.x-nodes[i].x,dy=mouse.y-nodes[i].y;
-          var d=Math.sqrt(dx*dx+dy*dy);
-          if(d<minD){minD=d;best=nodes[i];}
+        var mx=e.clientX,my=e.clientY,found=null;
+        skills.forEach(function(s,i){
+          var sx=window.innerWidth*s.x+offsets[i].dx;
+          var sy=window.innerHeight*s.y+offsets[i].dy;
+          var d=Math.sqrt((mx-sx)**2+(my-sy)**2);
+          if(d<40){found=s;}
+        });
+        if(found){
+          gc.querySelector('.gc-title').textContent=found.title;
+          gc.querySelector('.gc-sub').textContent='Senior Data Analyst';
+          gc.querySelector('.gc-body').innerHTML=
+            '<div class="gc-row"><span>تجربه</span><span>'+found.exp+'</span></div>'+
+            '<div class="gc-row"><span>پروژه‌ها</span><span>'+found.pro+'</span></div>';
+          gc.classList.add('visible');
+          var cx=Math.min(e.clientX+30,window.innerWidth-250);
+          var cy=Math.max(10,Math.min(e.clientY-40,window.innerHeight-140));
+          gc.style.left=cx+'px';gc.style.top=cy+'px';
+        }else{
+          gc.classList.remove('visible');
         }
-        gcData=best?{node:best}:null;
       });
-      document.addEventListener('mouseleave',function(){
-        mouse.x=-9999;mouse.y=-9999;gcData=null;
-        cls&&cls.classList.remove('visible');
-      });
-      // touch support
-      document.addEventListener('touchmove',function(e){
-        var t=e.touches[0];
-        mouse.x=t.clientX;mouse.y=t.clientY;
-      },{passive:true});
-      document.addEventListener('touchend',function(){
-        mouse.x=-9999;mouse.y=-9999;
-      });
-      // rebuild on resize
-      var resizeTimer;
-      window.addEventListener('resize',function(){
-        clearTimeout(resizeTimer);
-        resizeTimer=setTimeout(function(){
-          cancelAnimationFrame(frame);
-          buildNetwork();
-          render();
-        },300);
-      });
-      render();
+      document.addEventListener('mouseleave',function(){gc.classList.remove('visible');});
     })();
   </script>
 </body>
