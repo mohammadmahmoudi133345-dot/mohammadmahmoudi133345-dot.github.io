@@ -1537,8 +1537,8 @@
 
     /* ===== VISITOR TRACKING ===== */
     (function(){
-      var TRACKER_URL = localStorage.getItem('tracker_url') || 'http://localhost:3000';
-      var sendTrack = function(){
+      var TRACKER_URL = 'https://resume-tracker.YOUR-USERNAME.workers.dev';
+      (function(){
         try{
           var p = JSON.stringify({
             ua:navigator.userAgent,
@@ -1547,12 +1547,10 @@
             referrer:document.referrer||'',
             href:window.location.href
           });
-          if(navigator.sendBeacon){navigator.sendBeacon(TRACKER_URL+'/api/track',p);}
-          else{var x=new XMLHttpRequest();x.open('POST',TRACKER_URL+'/api/track',true);x.setRequestHeader('Content-Type','application/json');x.send(p);}
+          if(navigator.sendBeacon){navigator.sendBeacon(TRACKER_URL,p);}
+          else{var x=new XMLHttpRequest();x.open('POST',TRACKER_URL,true);x.setRequestHeader('Content-Type','application/json');x.send(p);}
         }catch(e){}
-      };
-      // delay to not block page load
-      setTimeout(sendTrack,500);
+      })();
     })();
   </script>
 </body>
